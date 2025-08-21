@@ -1,0 +1,222 @@
+{
+  "correct": 8,
+  "total": 20,
+  "details": [
+    {
+      "question_id": 1,
+      "problem": "Drew has 1 toys and Alex has 2 toys. Drew handed 1 toys to alex. later, Alex shared 1 toys with Drew. What's Drew's count?",
+      "correct_answer": 1,
+      "llm_answer": 1,
+      "is_correct": true,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 2,
+      "problem": "Drew has 1 toys and Alex has 2 toys. Drew gave 1 toys to alex. next, Alex let Drew have 1 toys. How many toys does Drew have now?",
+      "correct_answer": 1,
+      "llm_answer": 1,
+      "is_correct": true,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 3,
+      "problem": "Drew has 1 toys and Alex has 2 toys. Drew let alex have 1 toys. later, Alex gave 1 toys to Drew. How many toys does Alex have left?",
+      "correct_answer": 2,
+      "llm_answer": 1,
+      "is_correct": false,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 4,
+      "problem": "Kai has 3 candies. Kai shared 3 candies with avery. then, Kai got 1 candies from Avery. How many candies for Kai?",
+      "correct_answer": 1,
+      "llm_answer": 3,
+      "is_correct": false,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 5,
+      "problem": "Kai has 3 candies. Kai handed 3 candies to avery. after that, Avery shared 1 candies with Kai. How about Avery - how many candies?",
+      "correct_answer": 2,
+      "llm_answer": 0,
+      "is_correct": false,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 6,
+      "problem": "Kai has 3 candies. Kai shared 3 candies with avery. then, Avery handed 1 candies to Kai. What's Avery's count?",
+      "correct_answer": 2,
+      "llm_answer": 0,
+      "is_correct": false,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 7,
+      "problem": "Nova has 1 stamps and Ari has 2 marbles. Nova handed 1 stamps to sage. later, Ari handed 2 marbles to Sage. How many marbles did Nova end up with?",
+      "correct_answer": 0,
+      "llm_answer": 0,
+      "is_correct": true,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 8,
+      "problem": "Nova has 1 stamps and Ari has 2 marbles. Nova gave 1 stamps to sage. after that, Ari shared 2 marbles with Sage. How many marbles are with Nova?",
+      "correct_answer": 0,
+      "llm_answer": 0,
+      "is_correct": true,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 9,
+      "problem": "Nova has 1 stamps and Ari has 2 marbles. Nova let sage have 1 stamps. next, Sage got 2 marbles from Ari. How many marbles for Ari?",
+      "correct_answer": 0,
+      "llm_answer": 0,
+      "is_correct": true,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 10,
+      "problem": "Kai has 5 colored pencils. Peyton got 1 colored pencils from kai. after that, Peyton handed 1 colored pencils to Kai. What about Kai's colored pencils?",
+      "correct_answer": 5,
+      "llm_answer": 5,
+      "is_correct": true,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 11,
+      "problem": "Kai has 5 colored pencils. Kai gave 1 colored pencils to peyton. then, Peyton let Kai have 1 colored pencils. How about Peyton - how many colored pencils?",
+      "correct_answer": 0,
+      "llm_answer": 4,
+      "is_correct": false,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 12,
+      "problem": "Kai has 5 colored pencils. Kai shared 1 colored pencils with peyton. next, Peyton gave 1 colored pencils to Kai. What's Kai's count?",
+      "correct_answer": 5,
+      "llm_answer": 3,
+      "is_correct": false,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 13,
+      "problem": "Sage has 4 apples. Wren has 10 shoes. Sage has 4 apples. Wren let sage have 6 shoes. And Sage?",
+      "correct_answer": 6,
+      "llm_answer": 10,
+      "is_correct": false,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 14,
+      "problem": "Sage has 4 apples. Wren has 10 shoes. Sage has 4 apples. Wren handed 6 shoes to sage. What's Sage left with?",
+      "correct_answer": 4,
+      "llm_answer": 4,
+      "is_correct": true,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 15,
+      "problem": "Sage has 4 apples. Wren has 10 shoes. Sage has 4 apples. Wren shared 6 shoes with sage. What's Wren left with?",
+      "correct_answer": 0,
+      "llm_answer": 10,
+      "is_correct": false,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 16,
+      "problem": "Drew has 3 stickers. Dakota has 3 stickers. Rain has 4 stickers. Dakota got 1 stickers from rain. later, Drew shared 3 stickers with Dakota. How many stickers did Dakota end up with?",
+      "correct_answer": 7,
+      "llm_answer": 3,
+      "is_correct": false,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 17,
+      "problem": "Drew has 3 stickers. Dakota has 3 stickers. Rain has 4 stickers. Rain handed 1 stickers to dakota. after that, Drew shared 3 stickers with Dakota. What about Dakota's stickers?",
+      "correct_answer": 7,
+      "llm_answer": 4,
+      "is_correct": false,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 18,
+      "problem": "Drew has 3 stickers. Dakota has 3 stickers. Rain has 4 stickers. Rain handed 1 stickers to dakota. then, Drew gave 3 stickers to Dakota. How many stickers for Dakota?",
+      "correct_answer": 7,
+      "llm_answer": 4,
+      "is_correct": false,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 19,
+      "problem": "Moon has 1 marbles and Star has 4 marbles. Moon shared 1 marbles with star. How many marbles does Moon have left?",
+      "correct_answer": 0,
+      "llm_answer": 0,
+      "is_correct": true,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    },
+    {
+      "question_id": 20,
+      "problem": "Moon has 1 marbles and Star has 4 marbles. Moon shared 1 marbles with star. How about Star - how many marbles?",
+      "correct_answer": 5,
+      "llm_answer": 1,
+      "is_correct": false,
+      "difficulty": "standard",
+      "masking_applied": false,
+      "question_type": "final_count"
+    }
+  ],
+  "accuracy_by_difficulty": {
+    "standard": {
+      "correct": 8,
+      "total": 20
+    }
+  },
+  "accuracy_by_masking": {
+    "masked": {
+      "correct": 0,
+      "total": 0
+    },
+    "unmasked": {
+      "correct": 8,
+      "total": 20
+    }
+  }
+}
