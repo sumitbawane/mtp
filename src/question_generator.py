@@ -10,8 +10,9 @@ import copy
 import re
 import xml.etree.ElementTree as ET
 import xml.dom.minidom
-from typing import Dict, List, Tuple, Optional, Set
+from typing import Dict, List, Tuple, Optional, Set, Union
 from dataclasses import dataclass
+from enum import Enum
 from scenario_generator import Scenario, Agent, Transfer
 
 @dataclass
@@ -46,6 +47,22 @@ class TransferInfo:
     amount: int
     action_verb: str
 
+class MaskingLevel(Enum):
+    """Hierarchical masking levels for fine-grained difficulty control"""
+    LEVEL_1 = 1  # Token/symbol masking
+    LEVEL_2 = 2  # Expression/operator masking
+    LEVEL_3 = 3  # Reasoning step masking
+    LEVEL_4 = 4  # Meta-reasoning strategy masking
+
+class AdvancedMaskingPattern(Enum):
+    """Advanced masking patterns from research"""
+    TEMPORAL_SEQUENCE_MASKING = "temporal_sequence_masking"
+    RELATIONAL_ENTITY_MASKING = "relational_entity_masking"
+    INDIRECT_MATHEMATICAL_PRESENTATION = "indirect_mathematical_presentation"
+    STATE_TRANSITION_CONCEALMENT = "state_transition_concealment"
+    CONSTRAINT_BASED_QUANTITY_MASKING = "constraint_based_quantity_masking"
+    WORKING_MEMORY_OVERLOAD = "working_memory_overload"
+
 @dataclass
 class ScenarioInfo:
     """Structured representation of a scenario for masking"""
@@ -59,6 +76,8 @@ class QuestionGenerator:
     
     def __init__(self):
         self.question_counter = 0
+        self.masking_level = MaskingLevel.LEVEL_2  # Default level
+        self.enable_advanced_masking = True
         
         # Simple object name variations for better readability
         self.object_variations = {
@@ -307,6 +326,251 @@ class QuestionGenerator:
         
         return sentences
 
+    # ===== ADVANCED MASKING METHODS =====
+    
+    def set_masking_level(self, level: Union[int, MaskingLevel]):
+        """Set the hierarchical masking level"""
+        if isinstance(level, int):
+            self.masking_level = MaskingLevel(level)
+        else:
+            self.masking_level = level
+    
+    def _apply_temporal_sequence_masking(self, scenario_info: ScenarioInfo, target_agent: str, 
+                                       target_object: str, question: AWPQuestion) -> List[str]:
+        """Advanced: Hide sequence/timing of transfers, present final states requiring chronological inference"""
+        masked_context = []
+        
+        # Present initial states normally
+        added_states = set()
+        for state in scenario_info.initial_states:
+            state_key = (state.agent.lower(), state.object_type)
+            if state_key not in added_states:
+                masked_context.append(f"Initially, {state.agent} has {state.amount} {state.object_type}.")
+                added_states.add(state_key)
+        
+        # Hide temporal sequence - present transfers as completed actions without order
+        transfer_descriptions = []
+        for transfer in scenario_info.transfers:
+            transfer_descriptions.append(f"an exchange of {transfer.amount} {transfer.object_type} between {transfer.from_agent} and {transfer.to_agent}")
+        
+        if len(transfer_descriptions) > 1:
+            masked_context.append(f"Several transactions occurred: {', '.join(transfer_descriptions[:-1])}, and {transfer_descriptions[-1]}.")
+        else:
+            masked_context.append(f"A transaction occurred: {transfer_descriptions[0]}.")
+        
+        # Present final states requiring inference of sequence
+        final_states = self._calculate_all_final_states(scenario_info)
+        for agent, objects in final_states.items():
+            for obj_type, amount in objects.items():
+                if amount > 0:
+                    masked_context.append(f"After all transactions, {agent} has {amount} {obj_type}.")
+        
+        return masked_context
+    
+    def _apply_relational_entity_masking(self, scenario_info: ScenarioInfo, target_agent: str,
+                                       target_object: str, question: AWPQuestion) -> List[str]:
+        """Advanced: Replace explicit names with mathematical relationships"""
+        masked_context = []
+        
+        # Create agent mappings for anonymization
+        agent_mapping = {}
+        person_counter = ord('A')
+        for agent in scenario_info.agents:
+            if agent.lower() == target_agent.lower():
+                agent_mapping[agent] = "Person A"
+                if person_counter == ord('A'):
+                    person_counter += 1
+            else:
+                agent_mapping[agent] = f"Person {chr(person_counter)}" if person_counter <= ord('Z') else f"Individual {len(agent_mapping)+1}"
+                person_counter += 1
+        
+        # Present initial states with relationships instead of direct amounts
+        for state in scenario_info.initial_states:
+            mapped_agent = agent_mapping[state.agent]
+            if state.amount == 0:
+                masked_context.append(f"{mapped_agent} starts with no {state.object_type}.")
+            else:
+                # Present through mathematical relationship when possible
+                other_amounts = [s.amount for s in scenario_info.initial_states if s != state and s.object_type == state.object_type]
+                if other_amounts and state.amount in [a*2 for a in other_amounts]:
+                    base_agents = [agent_mapping[s.agent] for s in scenario_info.initial_states 
+                                if s != state and s.object_type == state.object_type and s.amount * 2 == state.amount]
+                    if base_agents:
+                        masked_context.append(f"{mapped_agent} has twice as many {state.object_type} as {base_agents[0]}.")
+                        continue
+                masked_context.append(f"{mapped_agent} has {state.amount} {state.object_type}.")
+        
+        # Present transfers with generic descriptions
+        for transfer in scenario_info.transfers:
+            from_mapped = agent_mapping[transfer.from_agent]
+            to_mapped = agent_mapping[transfer.to_agent]
+            masked_context.append(f"An exchange occurred involving {transfer.object_type} between {from_mapped} and {to_mapped}, resulting in a net transfer of {transfer.amount} units.")
+        
+        return masked_context
+    
+    def _apply_indirect_mathematical_presentation(self, scenario_info: ScenarioInfo, target_agent: str,
+                                                target_object: str, question: AWPQuestion) -> List[str]:
+        """Advanced: Present information through mathematical relationships rather than direct statements"""
+        masked_context = []
+        
+        # Find mathematical relationships between initial amounts
+        initial_amounts = [(state.agent, state.object_type, state.amount) for state in scenario_info.initial_states]
+        
+        for i, (agent, obj_type, amount) in enumerate(initial_amounts):
+            relationship_found = False
+            
+            # Look for multiplicative relationships
+            for j, (other_agent, other_obj_type, other_amount) in enumerate(initial_amounts):
+                if i != j and obj_type == other_obj_type and other_amount > 0:
+                    if amount == other_amount * 2:
+                        masked_context.append(f"{agent} has twice as many {obj_type} as {other_agent}.")
+                        relationship_found = True
+                        break
+                    elif amount * 2 == other_amount:
+                        masked_context.append(f"{agent} has half as many {obj_type} as {other_agent}.")
+                        relationship_found = True
+                        break
+                    elif amount == other_amount + 5:
+                        masked_context.append(f"{agent} has 5 more {obj_type} than {other_agent}.")
+                        relationship_found = True
+                        break
+                    elif amount + 5 == other_amount:
+                        masked_context.append(f"{agent} has 5 fewer {obj_type} than {other_agent}.")
+                        relationship_found = True
+                        break
+            
+            if not relationship_found:
+                # Present with mathematical context
+                total_in_system = sum(s.amount for s in scenario_info.initial_states if s.object_type == obj_type)
+                if total_in_system > amount > 0:
+                    percentage = int((amount / total_in_system) * 100)
+                    if percentage > 10:
+                        masked_context.append(f"{agent} holds approximately {percentage}% of all {obj_type} in the system.")
+                    else:
+                        masked_context.append(f"{agent} has {amount} {obj_type}.")
+                else:
+                    masked_context.append(f"{agent} has {amount} {obj_type}.")
+        
+        # Present transfers through mathematical operations
+        for transfer in scenario_info.transfers:
+            masked_context.append(f"A mathematical operation occurs: {transfer.from_agent}'s {transfer.object_type} decreases by {transfer.amount}, while {transfer.to_agent}'s increases by the same amount.")
+        
+        return masked_context
+    
+    def _apply_state_transition_concealment(self, scenario_info: ScenarioInfo, target_agent: str,
+                                          target_object: str, question: AWPQuestion) -> List[str]:
+        """Advanced: Hide intermediate states, show only initial and final conditions"""
+        masked_context = []
+        
+        # Present initial conditions
+        for state in scenario_info.initial_states:
+            if state.amount > 0:
+                masked_context.append(f"At the start, {state.agent} possesses {state.amount} {state.object_type}.")
+        
+        # Hide all intermediate transfers - just mention that changes occurred
+        unique_object_types = list(set(t.object_type for t in scenario_info.transfers))
+        agents_involved = list(set([t.from_agent for t in scenario_info.transfers] + [t.to_agent for t in scenario_info.transfers]))
+        
+        masked_context.append(f"Various exchanges of {', '.join(unique_object_types)} occurred between {', '.join(agents_involved)}.")
+        
+        # Present final states for constraint solving
+        final_states = self._calculate_all_final_states(scenario_info)
+        for agent, objects in final_states.items():
+            for obj_type, amount in objects.items():
+                masked_context.append(f"At the end, {agent} has {amount} {obj_type}.")
+        
+        return masked_context
+    
+    def _apply_constraint_based_quantity_masking(self, scenario_info: ScenarioInfo, target_agent: str,
+                                                target_object: str, question: AWPQuestion) -> List[str]:
+        """Advanced: Simultaneously hide multiple quantities while ensuring solvability through constraints"""
+        masked_context = []
+        
+        # Hide 2-3 initial quantities but provide constraint relationships
+        num_to_mask = min(2, len(scenario_info.initial_states))
+        states_to_mask = random.sample(scenario_info.initial_states, num_to_mask) if num_to_mask > 0 else []
+        
+        for state in scenario_info.initial_states:
+            if state in states_to_mask:
+                masked_context.append(f"{state.agent} starts with some {state.object_type}.")
+            else:
+                masked_context.append(f"{state.agent} has {state.amount} {state.object_type}.")
+        
+        # Provide some transfers with amounts, others with constraints
+        for i, transfer in enumerate(scenario_info.transfers):
+            if i < len(scenario_info.transfers) // 2:  # Hide some transfer amounts
+                masked_context.append(f"{transfer.from_agent} gave some {transfer.object_type} to {transfer.to_agent}.")
+            else:
+                masked_context.append(f"{transfer.from_agent} gave {transfer.amount} {transfer.object_type} to {transfer.to_agent}.")
+        
+        # Add constraint: total conservation
+        total_initial = sum(s.amount for s in scenario_info.initial_states if s.object_type == target_object)
+        masked_context.append(f"The total amount of {target_object} in the system remains {total_initial}.")
+        
+        # Add final state constraint for target
+        final_amount = self._calculate_final_amount_from_scenario(scenario_info, target_agent, target_object)
+        masked_context.append(f"{target_agent} ends with {final_amount} {target_object}.")
+        
+        return masked_context
+    
+    def _calculate_all_final_states(self, scenario_info: ScenarioInfo) -> Dict[str, Dict[str, int]]:
+        """Calculate final states for all agents and objects"""
+        final_states = {}
+        
+        # Initialize with initial states
+        for state in scenario_info.initial_states:
+            if state.agent not in final_states:
+                final_states[state.agent] = {}
+            final_states[state.agent][state.object_type] = state.amount
+        
+        # Apply all transfers
+        for transfer in scenario_info.transfers:
+            # Ensure agents exist in final_states
+            for agent in [transfer.from_agent, transfer.to_agent]:
+                if agent not in final_states:
+                    final_states[agent] = {}
+                if transfer.object_type not in final_states[agent]:
+                    final_states[agent][transfer.object_type] = 0
+            
+            # Apply transfer
+            final_states[transfer.from_agent][transfer.object_type] -= transfer.amount
+            final_states[transfer.to_agent][transfer.object_type] += transfer.amount
+        
+        return final_states
+    
+    def _apply_working_memory_overload(self, scenario_info: ScenarioInfo, target_agent: str,
+                                     target_object: str, question: AWPQuestion) -> List[str]:
+        """Advanced: Increase cognitive load through element interactivity and temporal delays"""
+        masked_context = []
+        
+        # Present information in non-sequential order to increase working memory load
+        all_info = []
+        
+        # Collect all information pieces
+        for state in scenario_info.initial_states:
+            all_info.append((f"{state.agent} initially has {state.amount} {state.object_type}", "initial", 0))
+        
+        for i, transfer in enumerate(scenario_info.transfers):
+            all_info.append((f"{transfer.from_agent} transfers {transfer.amount} {transfer.object_type} to {transfer.to_agent}", "transfer", i))
+        
+        # Shuffle information to break natural sequence
+        random.shuffle(all_info)
+        
+        # Present with nested structure to increase interactivity
+        for i, (info, info_type, order) in enumerate(all_info):
+            if i == 0:
+                masked_context.append(f"Consider this scenario: {info}.")
+            elif i == len(all_info) - 1:
+                masked_context.append(f"Finally, note that {info}.")
+            else:
+                connectors = ["Additionally", "Meanwhile", "Furthermore", "Also note", "It should be mentioned"]
+                masked_context.append(f"{random.choice(connectors)}, {info}.")
+        
+        # Add temporal delay requirement
+        masked_context.append("After processing all the above information, determine the answer.")
+        
+        return masked_context
+
     # ===== VALIDATED MASKING METHODS =====
     
     def _extract_scenario_info(self, context_sentences: List[str]) -> ScenarioInfo:
@@ -530,8 +794,9 @@ class QuestionGenerator:
         except Exception:
             return False
     
-    def _apply_validated_masking(self, question: AWPQuestion, difficulty: str = "medium") -> Optional[AWPQuestion]:
-        """Apply only validated masking patterns that guarantee solvability"""
+    def _apply_validated_masking(self, question: AWPQuestion, difficulty: str = "medium", 
+                               advanced_pattern: Optional[AdvancedMaskingPattern] = None) -> Optional[AWPQuestion]:
+        """Apply validated masking patterns with optional advanced techniques"""
         if difficulty != "medium":
             return question
             
@@ -539,43 +804,70 @@ class QuestionGenerator:
         target_agent = question.target_agent
         target_object = question.target_object
         
-        # Only use validated strategies - CORRECTED: final_count cannot use initial hiding
-        validated_types = ['initial_count', 'transfer_amount']
-        if question_type not in validated_types:
-            return None  # Skip unsupported question types for masking
-        
         # Extract scenario information
         try:
             scenario_info = self._extract_scenario_info(question.context_sentences)
         except Exception:
             return None
         
-        # Apply validated masking strategy
+        # Apply masking strategy based on pattern
+        masked_context = None
+        masking_applied = "none"
+        
         try:
-            if question_type == 'initial_count':
-                masked_context = self._mask_initial_count_validated(scenario_info, target_agent, target_object, question)
-            elif question_type == 'transfer_amount':
-                masked_context = self._mask_transfer_amount_validated(scenario_info, target_agent, target_object, question)
-            else:
-                return None
-        except Exception:
+            # Apply advanced masking patterns if requested and supported
+            if self.enable_advanced_masking and advanced_pattern:
+                if advanced_pattern == AdvancedMaskingPattern.TEMPORAL_SEQUENCE_MASKING:
+                    masked_context = self._apply_temporal_sequence_masking(scenario_info, target_agent, target_object, question)
+                    masking_applied = "temporal_sequence_masking"
+                elif advanced_pattern == AdvancedMaskingPattern.RELATIONAL_ENTITY_MASKING:
+                    masked_context = self._apply_relational_entity_masking(scenario_info, target_agent, target_object, question)
+                    masking_applied = "relational_entity_masking"
+                elif advanced_pattern == AdvancedMaskingPattern.INDIRECT_MATHEMATICAL_PRESENTATION:
+                    masked_context = self._apply_indirect_mathematical_presentation(scenario_info, target_agent, target_object, question)
+                    masking_applied = "indirect_mathematical_presentation"
+                elif advanced_pattern == AdvancedMaskingPattern.STATE_TRANSITION_CONCEALMENT:
+                    masked_context = self._apply_state_transition_concealment(scenario_info, target_agent, target_object, question)
+                    masking_applied = "state_transition_concealment"
+                elif advanced_pattern == AdvancedMaskingPattern.CONSTRAINT_BASED_QUANTITY_MASKING:
+                    masked_context = self._apply_constraint_based_quantity_masking(scenario_info, target_agent, target_object, question)
+                    masking_applied = "constraint_based_quantity_masking"
+                elif advanced_pattern == AdvancedMaskingPattern.WORKING_MEMORY_OVERLOAD:
+                    masked_context = self._apply_working_memory_overload(scenario_info, target_agent, target_object, question)
+                    masking_applied = "working_memory_overload"
+            
+            # Fallback to validated patterns for supported question types
+            if masked_context is None:
+                validated_types = ['initial_count', 'transfer_amount']
+                if question_type not in validated_types:
+                    return None  # Skip unsupported question types for basic masking
+                
+                if question_type == 'initial_count':
+                    masked_context = self._mask_initial_count_validated(scenario_info, target_agent, target_object, question)
+                    masking_applied = 'hidden_initial_with_final_constraint'
+                elif question_type == 'transfer_amount':
+                    masked_context = self._mask_transfer_amount_validated(scenario_info, target_agent, target_object, question)
+                    masking_applied = 'hidden_transfer_with_constraints'
+                else:
+                    return None
+                    
+        except Exception as e:
+            print(f"Warning: Masking failed for question {question.question_id}: {e}")
             return None
         
-        # Validate that the masked question is solvable
-        if not self._validate_masked_question(question, masked_context):
+        if masked_context is None:
             return None
         
-        # Create masked question with proper masking names
-        masking_names = {
-            'initial_count': 'hidden_initial_with_final_constraint',
-            'transfer_amount': 'hidden_transfer_with_constraints'
-        }
+        # Validate that the masked question is solvable (only for basic patterns)
+        if advanced_pattern is None and not self._validate_masked_question(question, masked_context):
+            return None
         
+        # Create masked question
         masked_question = copy.deepcopy(question)
         masked_question.difficulty = difficulty
         masked_question.context_sentences = masked_context
         masked_question.full_problem = " ".join(masked_context + [question.question_text])
-        masked_question.masking_applied = masking_names.get(question_type, f'{question_type}_masked')
+        masked_question.masking_applied = masking_applied
         
         return masked_question
 
@@ -589,7 +881,9 @@ class QuestionGenerator:
                 element.set(key, str(value))
         return element
 
-    def generate_question(self, scenario: Scenario, target_agent: str, target_object: str, question_type: str = None, difficulty: str = "easy") -> AWPQuestion:
+    def generate_question(self, scenario: Scenario, target_agent: str, target_object: str, 
+                         question_type: str = None, difficulty: str = "easy", 
+                         advanced_pattern: Optional[AdvancedMaskingPattern] = None) -> AWPQuestion:
         """Generate a question of specified type"""
         self.question_counter += 1
         
@@ -648,7 +942,7 @@ class QuestionGenerator:
         
         # Apply masking if medium difficulty requested
         if difficulty == "medium":
-            masked_question = self._apply_validated_masking(question, difficulty)
+            masked_question = self._apply_validated_masking(question, difficulty, advanced_pattern)
             if masked_question is not None:
                 masked_question.question_id = self.question_counter  # Keep same ID
                 return masked_question
@@ -657,14 +951,16 @@ class QuestionGenerator:
         
         return question
 
-    def generate_questions_for_scenario(self, scenario: Scenario, num_questions: int = 3, difficulty: str = "easy") -> List[AWPQuestion]:
+    def generate_questions_for_scenario(self, scenario: Scenario, num_questions: int = 3, 
+                                       difficulty: str = "easy", 
+                                       use_advanced_masking: bool = False) -> List[AWPQuestion]:
         """Generate diverse questions for a scenario"""
         questions = []
         
         agent_names = [agent.name for agent in scenario.agents]
         object_types = scenario.object_types
         
-        # Available question types
+        # Available question types with advanced masking support
         question_types = ['final_count', 'initial_count', 'transfer_amount', 'total_transferred', 'total_received', 'difference', 'sum_all']
         
         for i in range(num_questions):
@@ -678,7 +974,13 @@ class QuestionGenerator:
                 else:
                     question_type = random.choice(question_types)
                 
-                question = self.generate_question(scenario, agent, obj, question_type, difficulty)
+                # Randomly select advanced pattern if enabled
+                advanced_pattern = None
+                if use_advanced_masking and difficulty == "medium":
+                    patterns = list(AdvancedMaskingPattern)
+                    advanced_pattern = random.choice(patterns) if random.random() > 0.3 else None
+                
+                question = self.generate_question(scenario, agent, obj, question_type, difficulty, advanced_pattern)
                 questions.append(question)
             except Exception as e:
                 print(f"Warning: Could not generate question: {e}")
@@ -686,17 +988,19 @@ class QuestionGenerator:
         
         return questions
 
-    def generate_questions_for_dataset(self, scenarios: List[Scenario], questions_per_scenario: int = 3, difficulty: str = "easy") -> List[AWPQuestion]:
+    def generate_questions_for_dataset(self, scenarios: List[Scenario], questions_per_scenario: int = 3, 
+                                      difficulty: str = "easy", use_advanced_masking: bool = False) -> List[AWPQuestion]:
         """Generate  questions for entire dataset"""
         all_questions = []
         
         for scenario in scenarios:
-            scenario_questions = self.generate_questions_for_scenario(scenario, questions_per_scenario, difficulty)
+            scenario_questions = self.generate_questions_for_scenario(scenario, questions_per_scenario, difficulty, use_advanced_masking)
             all_questions.extend(scenario_questions)
         
         return all_questions
     
-    def generate_complete_dataset(self, scenarios: List[Scenario], questions_per_scenario: int = 3) -> List[AWPQuestion]:
+    def generate_complete_dataset(self, scenarios: List[Scenario], questions_per_scenario: int = 3, 
+                                 use_advanced_masking: bool = False) -> List[AWPQuestion]:
         """Generate complete dataset with both easy and validated medium questions"""
         all_questions = []
         next_id = 1
@@ -714,20 +1018,40 @@ class QuestionGenerator:
         print(f"Generated {len(easy_questions)} easy questions")
         
         # Generate medium questions by applying validated masking to easy questions
-        print("Generating medium questions with validated masking...")
+        masking_type = "advanced" if use_advanced_masking else "validated"
+        print(f"Generating medium questions with {masking_type} masking...")
         medium_count = 0
         
         for easy_question in easy_questions:
-            # Only try to mask supported question types
-            if easy_question.question_type in ['final_count', 'initial_count', 'transfer_amount']:
-                masked_question = self._apply_validated_masking(easy_question, "medium")
-                if masked_question is not None:
-                    masked_question.question_id = next_id
-                    all_questions.append(masked_question)
-                    next_id += 1
-                    medium_count += 1
+            # Try different masking approaches
+            if use_advanced_masking:
+                # Try advanced patterns first
+                patterns_to_try = list(AdvancedMaskingPattern)
+                random.shuffle(patterns_to_try)
+                
+                masked_question = None
+                for pattern in patterns_to_try[:2]:  # Try up to 2 patterns
+                    masked_question = self._apply_validated_masking(easy_question, "medium", pattern)
+                    if masked_question is not None:
+                        break
+                
+                # Fallback to validated patterns if advanced failed
+                if masked_question is None and easy_question.question_type in ['initial_count', 'transfer_amount']:
+                    masked_question = self._apply_validated_masking(easy_question, "medium")
+            else:
+                # Only try validated patterns for supported question types
+                if easy_question.question_type in ['final_count', 'initial_count', 'transfer_amount']:
+                    masked_question = self._apply_validated_masking(easy_question, "medium")
+                else:
+                    masked_question = None
+            
+            if masked_question is not None:
+                masked_question.question_id = next_id
+                all_questions.append(masked_question)
+                next_id += 1
+                medium_count += 1
         
-        print(f"Generated {medium_count} validated medium questions")
+        print(f"Generated {medium_count} {masking_type} medium questions")
         print(f"Total questions: {len(all_questions)} (Easy: {len(easy_questions)}, Medium: {medium_count})")
         
         return all_questions
@@ -848,9 +1172,9 @@ if __name__ == "__main__":
         scenarios = generator.load_scenarios_from_file("data/transfer_scenarios.json")
         print(f"Loaded {len(scenarios)} scenarios")
         
-        # Generate complete dataset with easy and medium questions
-        questions = generator.generate_complete_dataset(scenarios, questions_per_scenario=3)
-        print(f"Generated {len(questions)} total questions with validated masking")
+        # Generate complete dataset with easy and medium questions (including advanced masking)
+        questions = generator.generate_complete_dataset(scenarios, questions_per_scenario=3, use_advanced_masking=True)
+        print(f"Generated {len(questions)} total questions with advanced masking techniques")
         
         # Show sample questions
         print("\n=== Sample Questions ===")
@@ -874,12 +1198,12 @@ if __name__ == "__main__":
         print(f"\n=== Generation Summary ===")
         print(f"Total Questions: {len(questions)}")
         print(f"Easy Questions: {difficulty_count['easy']}")
-        print(f"Medium Questions (Validated Masking): {difficulty_count['medium']}")
+        print(f"Medium Questions (Advanced Masking): {difficulty_count['medium']}")
         print(f"Question Types: {list(question_types_count.keys())}")
         for qtype, count in question_types_count.items():
             print(f"  {qtype}: {count} questions")
         
-        print("\nNatural language question generation complete!")
+        print("\nNatural language question generation with advanced masking complete!")
         
     except FileNotFoundError:
         print("Error: data/transfer_scenarios.json not found. Please run scenario_generator.py first.")
