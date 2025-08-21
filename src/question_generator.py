@@ -101,6 +101,10 @@ class QuestionGenerator:
             "How many {object} for {agent}?"
         ]
 
+    def _capitalize_agent_name(self, name: str) -> str:
+        """Ensure consistent capitalization of agent names"""
+        return name.capitalize()
+
     def _pluralize_correctly(self, object_name: str, quantity: int) -> str:
         """Proper pluralization with correct grammar"""
         if quantity == 1:
@@ -165,8 +169,7 @@ class QuestionGenerator:
             return f"How many {display_obj} did {target_agent} transfer?", 0
         
         transfer = random.choice(relevant_transfers)
-        proper_obj = self._pluralize_correctly(display_obj, transfer.quantity)
-        obj_name = proper_obj if transfer.quantity > 1 else display_obj
+        obj_name = self._pluralize_correctly(display_obj, transfer.quantity)
         
         if transfer.from_agent == target_agent:
             templates = [
@@ -269,8 +272,7 @@ class QuestionGenerator:
             for obj_type, quantity in agent.initial_inventory.items():
                 if quantity > 0:
                     display_obj = self._get_display_object(obj_type)
-                    proper_obj = self._pluralize_correctly(display_obj, quantity)
-                    obj_name = proper_obj if quantity > 1 else display_obj
+                    obj_name = self._pluralize_correctly(display_obj, quantity)
                     agent_items.append(f"{quantity} {obj_name}")
             
             if agent_items:
@@ -301,26 +303,28 @@ class QuestionGenerator:
         # Now describe transfers naturally
         for i, transfer in enumerate(scenario.transfers):
             display_obj = self._get_display_object(transfer.object_type)
-            proper_obj = self._pluralize_correctly(display_obj, transfer.quantity)
-            obj_name = proper_obj if transfer.quantity > 1 else display_obj
+            obj_name = self._pluralize_correctly(display_obj, transfer.quantity)
             
-            # Natural action descriptions with connectors
+            # Natural action descriptions with connectors and proper capitalization
+            from_agent = self._capitalize_agent_name(transfer.from_agent)
+            to_agent = self._capitalize_agent_name(transfer.to_agent)
+            
             connectors = ["Then", "Next", "After that", "Later"] if i > 0 else [""]
             connector = random.choice(connectors) if i > 0 else ""
             
             action_templates = [
-                f"{transfer.from_agent} gave {transfer.quantity} {obj_name} to {transfer.to_agent}",
-                f"{transfer.from_agent} shared {transfer.quantity} {obj_name} with {transfer.to_agent}",
-                f"{transfer.from_agent} handed {transfer.quantity} {obj_name} to {transfer.to_agent}",
-                f"{transfer.to_agent} got {transfer.quantity} {obj_name} from {transfer.from_agent}",
-                f"{transfer.from_agent} let {transfer.to_agent} have {transfer.quantity} {obj_name}"
+                f"{from_agent} gave {transfer.quantity} {obj_name} to {to_agent}",
+                f"{from_agent} shared {transfer.quantity} {obj_name} with {to_agent}",
+                f"{from_agent} handed {transfer.quantity} {obj_name} to {to_agent}",
+                f"{to_agent} got {transfer.quantity} {obj_name} from {from_agent}",
+                f"{from_agent} let {to_agent} have {transfer.quantity} {obj_name}"
             ]
             
             action = random.choice(action_templates)
             if connector:
                 sentence = f"{connector.lower()}, {action}."
             else:
-                sentence = f"{action.capitalize()}."
+                sentence = f"{action}."
             
             sentences.append(sentence)
         
@@ -340,30 +344,40 @@ class QuestionGenerator:
         """Advanced: Hide sequence/timing of transfers, present final states requiring chronological inference"""
         masked_context = []
         
-        # Present initial states normally
+        # Present initial states normally with proper capitalization and grammar
         added_states = set()
         for state in scenario_info.initial_states:
             state_key = (state.agent.lower(), state.object_type)
             if state_key not in added_states:
-                masked_context.append(f"Initially, {state.agent} has {state.amount} {state.object_type}.")
+                agent_name = self._capitalize_agent_name(state.agent)
+                proper_obj = self._pluralize_correctly(state.object_type, state.amount)
+                masked_context.append(f"Initially, {agent_name} has {state.amount} {proper_obj}.")
                 added_states.add(state_key)
         
         # Hide temporal sequence - present transfers as completed actions without order
         transfer_descriptions = []
         for transfer in scenario_info.transfers:
-            transfer_descriptions.append(f"an exchange of {transfer.amount} {transfer.object_type} between {transfer.from_agent} and {transfer.to_agent}")
+            from_agent = self._capitalize_agent_name(transfer.from_agent)
+            to_agent = self._capitalize_agent_name(transfer.to_agent)
+            proper_obj = self._pluralize_correctly(transfer.object_type, transfer.amount)
+            transfer_descriptions.append(f"an exchange of {transfer.amount} {proper_obj} between {from_agent} and {to_agent}")
         
         if len(transfer_descriptions) > 1:
             masked_context.append(f"Several transactions occurred: {', '.join(transfer_descriptions[:-1])}, and {transfer_descriptions[-1]}.")
-        else:
+        elif transfer_descriptions:
             masked_context.append(f"A transaction occurred: {transfer_descriptions[0]}.")
         
-        # Present final states requiring inference of sequence
+        # Present final states requiring inference of sequence (avoid duplicates)
         final_states = self._calculate_all_final_states(scenario_info)
+        final_agents_added = set()
         for agent, objects in final_states.items():
             for obj_type, amount in objects.items():
-                if amount > 0:
-                    masked_context.append(f"After all transactions, {agent} has {amount} {obj_type}.")
+                agent_obj_key = (agent.lower(), obj_type)
+                if agent_obj_key not in final_agents_added and amount >= 0:
+                    agent_name = self._capitalize_agent_name(agent)
+                    proper_obj = self._pluralize_correctly(obj_type, amount)
+                    masked_context.append(f"After all transactions, {agent_name} has {amount} {proper_obj}.")
+                    final_agents_added.add(agent_obj_key)
         
         return masked_context
     
@@ -384,27 +398,47 @@ class QuestionGenerator:
                 agent_mapping[agent] = f"Person {chr(person_counter)}" if person_counter <= ord('Z') else f"Individual {len(agent_mapping)+1}"
                 person_counter += 1
         
-        # Present initial states with relationships instead of direct amounts
+        # Present initial states with relationships instead of direct amounts (avoid duplicates)
+        added_relations = set()
         for state in scenario_info.initial_states:
-            mapped_agent = agent_mapping[state.agent]
-            if state.amount == 0:
-                masked_context.append(f"{mapped_agent} starts with no {state.object_type}.")
-            else:
-                # Present through mathematical relationship when possible
-                other_amounts = [s.amount for s in scenario_info.initial_states if s != state and s.object_type == state.object_type]
-                if other_amounts and state.amount in [a*2 for a in other_amounts]:
-                    base_agents = [agent_mapping[s.agent] for s in scenario_info.initial_states 
-                                if s != state and s.object_type == state.object_type and s.amount * 2 == state.amount]
-                    if base_agents:
-                        masked_context.append(f"{mapped_agent} has twice as many {state.object_type} as {base_agents[0]}.")
-                        continue
-                masked_context.append(f"{mapped_agent} has {state.amount} {state.object_type}.")
+            state_key = (state.agent.lower(), state.object_type)
+            if state_key not in added_relations:
+                mapped_agent = agent_mapping[state.agent]
+                proper_obj = self._pluralize_correctly(state.object_type, state.amount)
+                
+                if state.amount == 0:
+                    masked_context.append(f"{mapped_agent} starts with no {proper_obj}.")
+                else:
+                    # Present through mathematical relationship when possible
+                    other_amounts = [s.amount for s in scenario_info.initial_states if s != state and s.object_type == state.object_type]
+                    relationship_found = False
+                    
+                    if other_amounts and state.amount in [a*2 for a in other_amounts]:
+                        base_agents = [agent_mapping[s.agent] for s in scenario_info.initial_states 
+                                    if s != state and s.object_type == state.object_type and s.amount * 2 == state.amount]
+                        if base_agents:
+                            masked_context.append(f"{mapped_agent} has twice as many {state.object_type} as {base_agents[0]}.")
+                            relationship_found = True
+                    
+                    if not relationship_found:
+                        masked_context.append(f"{mapped_agent} has {state.amount} {proper_obj}.")
+                
+                added_relations.add(state_key)
         
         # Present transfers with generic descriptions
         for transfer in scenario_info.transfers:
             from_mapped = agent_mapping[transfer.from_agent]
             to_mapped = agent_mapping[transfer.to_agent]
-            masked_context.append(f"An exchange occurred involving {transfer.object_type} between {from_mapped} and {to_mapped}, resulting in a net transfer of {transfer.amount} units.")
+            proper_obj = self._pluralize_correctly(transfer.object_type, transfer.amount)
+            
+            natural_transfer_descriptions = [
+                f"An exchange involving {proper_obj} took place between {from_mapped} and {to_mapped}.",
+                f"{from_mapped} and {to_mapped} traded {transfer.amount} {proper_obj}.",
+                f"There was a transaction of {transfer.amount} {proper_obj} between {from_mapped} and {to_mapped}.",
+                f"{from_mapped} transferred {transfer.amount} {proper_obj} to {to_mapped}."
+            ]
+            
+            masked_context.append(random.choice(natural_transfer_descriptions))
         
         return masked_context
     
@@ -451,9 +485,21 @@ class QuestionGenerator:
                 else:
                     masked_context.append(f"{agent} has {amount} {obj_type}.")
         
-        # Present transfers through mathematical operations
+        # Present transfers through mathematical relationships
         for transfer in scenario_info.transfers:
-            masked_context.append(f"A mathematical operation occurs: {transfer.from_agent}'s {transfer.object_type} decreases by {transfer.amount}, while {transfer.to_agent}'s increases by the same amount.")
+            from_agent = self._capitalize_agent_name(transfer.from_agent)
+            to_agent = self._capitalize_agent_name(transfer.to_agent)
+            proper_obj = self._pluralize_correctly(transfer.object_type, transfer.amount)
+            
+            # Use more natural mathematical language
+            natural_descriptions = [
+                f"The difference between {from_agent}'s and {to_agent}'s {transfer.object_type} changes by {transfer.amount}.",
+                f"{from_agent} reduces their {transfer.object_type} count by {transfer.amount}, while {to_agent} increases theirs by {transfer.amount}.",
+                f"After an interaction, {from_agent} has {transfer.amount} fewer {proper_obj} and {to_agent} has {transfer.amount} more.",
+                f"The balance shifts: {from_agent} loses {transfer.amount} {proper_obj} as {to_agent} gains the same amount."
+            ]
+            
+            masked_context.append(random.choice(natural_descriptions))
         
         return masked_context
     
@@ -462,22 +508,45 @@ class QuestionGenerator:
         """Advanced: Hide intermediate states, show only initial and final conditions"""
         masked_context = []
         
-        # Present initial conditions
+        # Present initial conditions (avoid duplicates)
+        added_initial = set()
         for state in scenario_info.initial_states:
-            if state.amount > 0:
-                masked_context.append(f"At the start, {state.agent} possesses {state.amount} {state.object_type}.")
+            state_key = (state.agent.lower(), state.object_type)
+            if state.amount > 0 and state_key not in added_initial:
+                agent_name = self._capitalize_agent_name(state.agent)
+                proper_obj = self._pluralize_correctly(state.object_type, state.amount)
+                masked_context.append(f"At the start, {agent_name} possesses {state.amount} {proper_obj}.")
+                added_initial.add(state_key)
         
         # Hide all intermediate transfers - just mention that changes occurred
         unique_object_types = list(set(t.object_type for t in scenario_info.transfers))
-        agents_involved = list(set([t.from_agent for t in scenario_info.transfers] + [t.to_agent for t in scenario_info.transfers]))
+        agents_involved = list(set([self._capitalize_agent_name(t.from_agent) for t in scenario_info.transfers] + 
+                                  [self._capitalize_agent_name(t.to_agent) for t in scenario_info.transfers]))
         
-        masked_context.append(f"Various exchanges of {', '.join(unique_object_types)} occurred between {', '.join(agents_involved)}.")
+        if unique_object_types and agents_involved:
+            obj_list = ', '.join(unique_object_types)
+            agent_list = ', '.join(agents_involved)
+            
+            natural_exchange_descriptions = [
+                f"Several transactions involving {obj_list} took place among {agent_list}.",
+                f"Multiple transfers of {obj_list} occurred between {agent_list}.",
+                f"There were exchanges of {obj_list} among {agent_list}.",
+                f"{agent_list} engaged in transactions involving {obj_list}."
+            ]
+            
+            masked_context.append(random.choice(natural_exchange_descriptions))
         
-        # Present final states for constraint solving
+        # Present final states for constraint solving (avoid duplicates)
         final_states = self._calculate_all_final_states(scenario_info)
+        added_final = set()
         for agent, objects in final_states.items():
             for obj_type, amount in objects.items():
-                masked_context.append(f"At the end, {agent} has {amount} {obj_type}.")
+                state_key = (agent.lower(), obj_type)
+                if state_key not in added_final and amount >= 0:
+                    agent_name = self._capitalize_agent_name(agent)
+                    proper_obj = self._pluralize_correctly(obj_type, amount)
+                    masked_context.append(f"At the end, {agent_name} has {amount} {proper_obj}.")
+                    added_final.add(state_key)
         
         return masked_context
     
@@ -546,25 +615,44 @@ class QuestionGenerator:
         # Present information in non-sequential order to increase working memory load
         all_info = []
         
-        # Collect all information pieces
-        for state in scenario_info.initial_states:
-            all_info.append((f"{state.agent} initially has {state.amount} {state.object_type}", "initial", 0))
+        # Collect all unique information pieces with proper grammar
+        all_info = []
+        added_info = set()
         
-        for i, transfer in enumerate(scenario_info.transfers):
-            all_info.append((f"{transfer.from_agent} transfers {transfer.amount} {transfer.object_type} to {transfer.to_agent}", "transfer", i))
+        for state in scenario_info.initial_states:
+            agent_name = self._capitalize_agent_name(state.agent)
+            proper_obj = self._pluralize_correctly(state.object_type, state.amount)
+            info_key = (state.agent.lower(), state.object_type, state.amount)
+            if info_key not in added_info:
+                all_info.append((f"{agent_name} initially has {state.amount} {proper_obj}", "initial"))
+                added_info.add(info_key)
+        
+        for transfer in scenario_info.transfers:
+            from_agent = self._capitalize_agent_name(transfer.from_agent)
+            to_agent = self._capitalize_agent_name(transfer.to_agent)
+            proper_obj = self._pluralize_correctly(transfer.object_type, transfer.amount)
+            all_info.append((f"{from_agent} transfers {transfer.amount} {proper_obj} to {to_agent}", "transfer"))
         
         # Shuffle information to break natural sequence
         random.shuffle(all_info)
         
-        # Present with nested structure to increase interactivity
-        for i, (info, info_type, order) in enumerate(all_info):
+        # Present with nested structure to increase interactivity (avoid repetitive connectors)
+        connectors = ["Additionally", "Meanwhile", "Furthermore", "Also note", "It should be mentioned"]
+        used_connectors = set()
+        
+        for i, (info, info_type) in enumerate(all_info):
             if i == 0:
                 masked_context.append(f"Consider this scenario: {info}.")
             elif i == len(all_info) - 1:
                 masked_context.append(f"Finally, note that {info}.")
             else:
-                connectors = ["Additionally", "Meanwhile", "Furthermore", "Also note", "It should be mentioned"]
-                masked_context.append(f"{random.choice(connectors)}, {info}.")
+                available_connectors = [c for c in connectors if c not in used_connectors]
+                if not available_connectors:
+                    used_connectors.clear()
+                    available_connectors = connectors
+                connector = random.choice(available_connectors)
+                used_connectors.add(connector)
+                masked_context.append(f"{connector}, {info}.")
         
         # Add temporal delay requirement
         masked_context.append("After processing all the above information, determine the answer.")
