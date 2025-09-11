@@ -1,0 +1,4268 @@
+[
+  {
+    "scenario_id": 1,
+    "agents": [
+      {
+        "name": "Sam",
+        "initial_inventory": {
+          "envelopes": 5,
+          "ribbons": 4
+        },
+        "final_inventory": {
+          "envelopes": 8,
+          "ribbons": 4
+        }
+      },
+      {
+        "name": "Cameron",
+        "initial_inventory": {
+          "envelopes": 4,
+          "ribbons": 10
+        },
+        "final_inventory": {
+          "envelopes": 4,
+          "ribbons": 10
+        }
+      },
+      {
+        "name": "Rowan",
+        "initial_inventory": {
+          "envelopes": 4,
+          "ribbons": 5
+        },
+        "final_inventory": {
+          "envelopes": 1,
+          "ribbons": 5
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Rowan",
+        "to_agent": "Sam",
+        "object_type": "envelopes",
+        "quantity": 2,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Rowan",
+        "to_agent": "Sam",
+        "object_type": "envelopes",
+        "quantity": 1,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "envelopes",
+      "ribbons"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 2,
+    "agents": [
+      {
+        "name": "Rain",
+        "initial_inventory": {
+          "envelopes": 5
+        },
+        "final_inventory": {
+          "envelopes": 2
+        }
+      },
+      {
+        "name": "Jamie",
+        "initial_inventory": {
+          "envelopes": 0
+        },
+        "final_inventory": {
+          "envelopes": 6
+        }
+      },
+      {
+        "name": "Reese",
+        "initial_inventory": {
+          "envelopes": 3
+        },
+        "final_inventory": {
+          "envelopes": 0
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Rain",
+        "to_agent": "Jamie",
+        "object_type": "envelopes",
+        "quantity": 3,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Reese",
+        "to_agent": "Jamie",
+        "object_type": "envelopes",
+        "quantity": 3,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "envelopes"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 3,
+    "agents": [
+      {
+        "name": "Wren",
+        "initial_inventory": {
+          "puzzles": 1,
+          "rulers": 4
+        },
+        "final_inventory": {
+          "puzzles": 2,
+          "rulers": 6
+        }
+      },
+      {
+        "name": "Ari",
+        "initial_inventory": {
+          "puzzles": 2,
+          "rulers": 2
+        },
+        "final_inventory": {
+          "puzzles": 1,
+          "rulers": 0
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Ari",
+        "to_agent": "Wren",
+        "object_type": "puzzles",
+        "quantity": 1,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Ari",
+        "to_agent": "Wren",
+        "object_type": "rulers",
+        "quantity": 2,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "puzzles",
+      "rulers"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 4,
+    "agents": [
+      {
+        "name": "Sage",
+        "initial_inventory": {
+          "ribbons": 1,
+          "toys": 3
+        },
+        "final_inventory": {
+          "ribbons": 1,
+          "toys": 4
+        }
+      },
+      {
+        "name": "Lane",
+        "initial_inventory": {
+          "ribbons": 3,
+          "toys": 3
+        },
+        "final_inventory": {
+          "ribbons": 3,
+          "toys": 2
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Lane",
+        "to_agent": "Sage",
+        "object_type": "toys",
+        "quantity": 1,
+        "transfer_id": 1
+      }
+    ],
+    "object_types": [
+      "ribbons",
+      "toys"
+    ],
+    "total_transfers": 1
+  },
+  {
+    "scenario_id": 5,
+    "agents": [
+      {
+        "name": "Wren",
+        "initial_inventory": {
+          "clips": 0
+        },
+        "final_inventory": {
+          "clips": 0
+        }
+      },
+      {
+        "name": "Lane",
+        "initial_inventory": {
+          "clips": 0
+        },
+        "final_inventory": {
+          "clips": 1
+        }
+      },
+      {
+        "name": "Storm",
+        "initial_inventory": {
+          "clips": 2
+        },
+        "final_inventory": {
+          "clips": 1
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Storm",
+        "to_agent": "Lane",
+        "object_type": "clips",
+        "quantity": 1,
+        "transfer_id": 1
+      }
+    ],
+    "object_types": [
+      "clips"
+    ],
+    "total_transfers": 1
+  },
+  {
+    "scenario_id": 6,
+    "agents": [
+      {
+        "name": "Morgan",
+        "initial_inventory": {
+          "cards": 5
+        },
+        "final_inventory": {
+          "cards": 9
+        }
+      },
+      {
+        "name": "River",
+        "initial_inventory": {
+          "cards": 10
+        },
+        "final_inventory": {
+          "cards": 6
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "River",
+        "to_agent": "Morgan",
+        "object_type": "cards",
+        "quantity": 8,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Morgan",
+        "to_agent": "River",
+        "object_type": "cards",
+        "quantity": 4,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "cards"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 7,
+    "agents": [
+      {
+        "name": "Blake",
+        "initial_inventory": {
+          "wrenches": 0
+        },
+        "final_inventory": {
+          "wrenches": 2
+        }
+      },
+      {
+        "name": "Vale",
+        "initial_inventory": {
+          "wrenches": 2
+        },
+        "final_inventory": {
+          "wrenches": 0
+        }
+      },
+      {
+        "name": "Remy",
+        "initial_inventory": {
+          "wrenches": 2
+        },
+        "final_inventory": {
+          "wrenches": 2
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Vale",
+        "to_agent": "Blake",
+        "object_type": "wrenches",
+        "quantity": 2,
+        "transfer_id": 1
+      }
+    ],
+    "object_types": [
+      "wrenches"
+    ],
+    "total_transfers": 1
+  },
+  {
+    "scenario_id": 8,
+    "agents": [
+      {
+        "name": "Cameron",
+        "initial_inventory": {
+          "puzzles": 0,
+          "gloves": 1
+        },
+        "final_inventory": {
+          "puzzles": 0,
+          "gloves": 1
+        }
+      },
+      {
+        "name": "Sam",
+        "initial_inventory": {
+          "puzzles": 6,
+          "gloves": 0
+        },
+        "final_inventory": {
+          "puzzles": 0,
+          "gloves": 0
+        }
+      },
+      {
+        "name": "Riley",
+        "initial_inventory": {
+          "puzzles": 5,
+          "gloves": 2
+        },
+        "final_inventory": {
+          "puzzles": 11,
+          "gloves": 2
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Sam",
+        "to_agent": "Riley",
+        "object_type": "puzzles",
+        "quantity": 3,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Sam",
+        "to_agent": "Riley",
+        "object_type": "puzzles",
+        "quantity": 3,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "puzzles",
+      "gloves"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 9,
+    "agents": [
+      {
+        "name": "Quinn",
+        "initial_inventory": {
+          "brushes": 0
+        },
+        "final_inventory": {
+          "brushes": 0
+        }
+      },
+      {
+        "name": "River",
+        "initial_inventory": {
+          "brushes": 4
+        },
+        "final_inventory": {
+          "brushes": 4
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "River",
+        "to_agent": "Quinn",
+        "object_type": "brushes",
+        "quantity": 4,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Quinn",
+        "to_agent": "River",
+        "object_type": "brushes",
+        "quantity": 4,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "brushes"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 10,
+    "agents": [
+      {
+        "name": "Avery",
+        "initial_inventory": {
+          "buttons": 4,
+          "marbles": 0
+        },
+        "final_inventory": {
+          "buttons": 7,
+          "marbles": 0
+        }
+      },
+      {
+        "name": "Taylor",
+        "initial_inventory": {
+          "buttons": 3,
+          "marbles": 0
+        },
+        "final_inventory": {
+          "buttons": 0,
+          "marbles": 0
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Taylor",
+        "to_agent": "Avery",
+        "object_type": "buttons",
+        "quantity": 3,
+        "transfer_id": 1
+      }
+    ],
+    "object_types": [
+      "buttons",
+      "marbles"
+    ],
+    "total_transfers": 1
+  },
+  {
+    "scenario_id": 11,
+    "agents": [
+      {
+        "name": "Rain",
+        "initial_inventory": {
+          "jerseys": 2
+        },
+        "final_inventory": {
+          "jerseys": 1
+        }
+      },
+      {
+        "name": "Wren",
+        "initial_inventory": {
+          "jerseys": 0
+        },
+        "final_inventory": {
+          "jerseys": 2
+        }
+      },
+      {
+        "name": "Vale",
+        "initial_inventory": {
+          "jerseys": 1
+        },
+        "final_inventory": {
+          "jerseys": 0
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Vale",
+        "to_agent": "Wren",
+        "object_type": "jerseys",
+        "quantity": 1,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Rain",
+        "to_agent": "Wren",
+        "object_type": "jerseys",
+        "quantity": 1,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "jerseys"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 12,
+    "agents": [
+      {
+        "name": "Kendall",
+        "initial_inventory": {
+          "staples": 0
+        },
+        "final_inventory": {
+          "staples": 1
+        }
+      },
+      {
+        "name": "Sam",
+        "initial_inventory": {
+          "staples": 4
+        },
+        "final_inventory": {
+          "staples": 5
+        }
+      },
+      {
+        "name": "Remy",
+        "initial_inventory": {
+          "staples": 4
+        },
+        "final_inventory": {
+          "staples": 2
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Sam",
+        "to_agent": "Kendall",
+        "object_type": "staples",
+        "quantity": 1,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Remy",
+        "to_agent": "Sam",
+        "object_type": "staples",
+        "quantity": 2,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "staples"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 13,
+    "agents": [
+      {
+        "name": "Blake",
+        "initial_inventory": {
+          "bats": 3,
+          "clips": 9
+        },
+        "final_inventory": {
+          "bats": 3,
+          "clips": 13
+        }
+      },
+      {
+        "name": "Morgan",
+        "initial_inventory": {
+          "bats": 3,
+          "clips": 5
+        },
+        "final_inventory": {
+          "bats": 3,
+          "clips": 1
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Morgan",
+        "to_agent": "Blake",
+        "object_type": "clips",
+        "quantity": 4,
+        "transfer_id": 1
+      }
+    ],
+    "object_types": [
+      "bats",
+      "clips"
+    ],
+    "total_transfers": 1
+  },
+  {
+    "scenario_id": 14,
+    "agents": [
+      {
+        "name": "Phoenix",
+        "initial_inventory": {
+          "gloves": 5
+        },
+        "final_inventory": {
+          "gloves": 0
+        }
+      },
+      {
+        "name": "Taylor",
+        "initial_inventory": {
+          "gloves": 4
+        },
+        "final_inventory": {
+          "gloves": 9
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Taylor",
+        "to_agent": "Phoenix",
+        "object_type": "gloves",
+        "quantity": 3,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Phoenix",
+        "to_agent": "Taylor",
+        "object_type": "gloves",
+        "quantity": 8,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "gloves"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 15,
+    "agents": [
+      {
+        "name": "Remy",
+        "initial_inventory": {
+          "puzzles": 4
+        },
+        "final_inventory": {
+          "puzzles": 8
+        }
+      },
+      {
+        "name": "Logan",
+        "initial_inventory": {
+          "puzzles": 8
+        },
+        "final_inventory": {
+          "puzzles": 8
+        }
+      },
+      {
+        "name": "Skylar",
+        "initial_inventory": {
+          "puzzles": 5
+        },
+        "final_inventory": {
+          "puzzles": 1
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Skylar",
+        "to_agent": "Remy",
+        "object_type": "puzzles",
+        "quantity": 4,
+        "transfer_id": 1
+      }
+    ],
+    "object_types": [
+      "puzzles"
+    ],
+    "total_transfers": 1
+  },
+  {
+    "scenario_id": 16,
+    "agents": [
+      {
+        "name": "Lane",
+        "initial_inventory": {
+          "sandwiches": 0,
+          "balls": 7
+        },
+        "final_inventory": {
+          "sandwiches": 1,
+          "balls": 7
+        }
+      },
+      {
+        "name": "Phoenix",
+        "initial_inventory": {
+          "sandwiches": 1,
+          "balls": 8
+        },
+        "final_inventory": {
+          "sandwiches": 0,
+          "balls": 8
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Phoenix",
+        "to_agent": "Lane",
+        "object_type": "sandwiches",
+        "quantity": 1,
+        "transfer_id": 1
+      }
+    ],
+    "object_types": [
+      "sandwiches",
+      "balls"
+    ],
+    "total_transfers": 1
+  },
+  {
+    "scenario_id": 17,
+    "agents": [
+      {
+        "name": "Sage",
+        "initial_inventory": {
+          "marbles": 16,
+          "balls": 9,
+          "rulers": 0
+        },
+        "final_inventory": {
+          "marbles": 8,
+          "balls": 9,
+          "rulers": 7
+        }
+      },
+      {
+        "name": "Rowan",
+        "initial_inventory": {
+          "marbles": 13,
+          "balls": 11,
+          "rulers": 14
+        },
+        "final_inventory": {
+          "marbles": 13,
+          "balls": 11,
+          "rulers": 7
+        }
+      },
+      {
+        "name": "Ari",
+        "initial_inventory": {
+          "marbles": 0,
+          "balls": 3,
+          "rulers": 9
+        },
+        "final_inventory": {
+          "marbles": 8,
+          "balls": 3,
+          "rulers": 9
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Sage",
+        "to_agent": "Ari",
+        "object_type": "marbles",
+        "quantity": 8,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Rowan",
+        "to_agent": "Sage",
+        "object_type": "rulers",
+        "quantity": 7,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "marbles",
+      "balls",
+      "rulers"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 18,
+    "agents": [
+      {
+        "name": "Emery",
+        "initial_inventory": {
+          "pens": 2,
+          "paints": 8,
+          "cakes": 2
+        },
+        "final_inventory": {
+          "pens": 0,
+          "paints": 8,
+          "cakes": 2
+        }
+      },
+      {
+        "name": "Jordan",
+        "initial_inventory": {
+          "pens": 14,
+          "paints": 19,
+          "cakes": 13
+        },
+        "final_inventory": {
+          "pens": 3,
+          "paints": 19,
+          "cakes": 17
+        }
+      },
+      {
+        "name": "Avery",
+        "initial_inventory": {
+          "pens": 4,
+          "paints": 0,
+          "cakes": 9
+        },
+        "final_inventory": {
+          "pens": 17,
+          "paints": 0,
+          "cakes": 5
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Emery",
+        "to_agent": "Avery",
+        "object_type": "pens",
+        "quantity": 2,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Jordan",
+        "to_agent": "Avery",
+        "object_type": "pens",
+        "quantity": 7,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Jordan",
+        "to_agent": "Avery",
+        "object_type": "pens",
+        "quantity": 4,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Avery",
+        "to_agent": "Jordan",
+        "object_type": "cakes",
+        "quantity": 4,
+        "transfer_id": 4
+      }
+    ],
+    "object_types": [
+      "pens",
+      "paints",
+      "cakes"
+    ],
+    "total_transfers": 4
+  },
+  {
+    "scenario_id": 19,
+    "agents": [
+      {
+        "name": "Micah",
+        "initial_inventory": {
+          "bats": 10,
+          "staples": 6
+        },
+        "final_inventory": {
+          "bats": 12,
+          "staples": 6
+        }
+      },
+      {
+        "name": "Reese",
+        "initial_inventory": {
+          "bats": 0,
+          "staples": 0
+        },
+        "final_inventory": {
+          "bats": 0,
+          "staples": 0
+        }
+      },
+      {
+        "name": "Blake",
+        "initial_inventory": {
+          "bats": 13,
+          "staples": 0
+        },
+        "final_inventory": {
+          "bats": 13,
+          "staples": 11
+        }
+      },
+      {
+        "name": "Peyton",
+        "initial_inventory": {
+          "bats": 13,
+          "staples": 13
+        },
+        "final_inventory": {
+          "bats": 11,
+          "staples": 2
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Peyton",
+        "to_agent": "Micah",
+        "object_type": "bats",
+        "quantity": 2,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Peyton",
+        "to_agent": "Blake",
+        "object_type": "staples",
+        "quantity": 5,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Peyton",
+        "to_agent": "Blake",
+        "object_type": "staples",
+        "quantity": 6,
+        "transfer_id": 3
+      }
+    ],
+    "object_types": [
+      "bats",
+      "staples"
+    ],
+    "total_transfers": 3
+  },
+  {
+    "scenario_id": 20,
+    "agents": [
+      {
+        "name": "Parker",
+        "initial_inventory": {
+          "markers": 4,
+          "notebooks": 0
+        },
+        "final_inventory": {
+          "markers": 3,
+          "notebooks": 0
+        }
+      },
+      {
+        "name": "Star",
+        "initial_inventory": {
+          "markers": 17,
+          "notebooks": 18
+        },
+        "final_inventory": {
+          "markers": 17,
+          "notebooks": 27
+        }
+      },
+      {
+        "name": "Kendall",
+        "initial_inventory": {
+          "markers": 6,
+          "notebooks": 14
+        },
+        "final_inventory": {
+          "markers": 7,
+          "notebooks": 5
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Parker",
+        "to_agent": "Kendall",
+        "object_type": "markers",
+        "quantity": 1,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Kendall",
+        "to_agent": "Star",
+        "object_type": "notebooks",
+        "quantity": 9,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "markers",
+      "notebooks"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 21,
+    "agents": [
+      {
+        "name": "Kendall",
+        "initial_inventory": {
+          "paints": 0,
+          "puzzles": 3
+        },
+        "final_inventory": {
+          "paints": 0,
+          "puzzles": 0
+        }
+      },
+      {
+        "name": "Peyton",
+        "initial_inventory": {
+          "paints": 19,
+          "puzzles": 9
+        },
+        "final_inventory": {
+          "paints": 19,
+          "puzzles": 11
+        }
+      },
+      {
+        "name": "Nova",
+        "initial_inventory": {
+          "paints": 17,
+          "puzzles": 1
+        },
+        "final_inventory": {
+          "paints": 17,
+          "puzzles": 1
+        }
+      },
+      {
+        "name": "Taylor",
+        "initial_inventory": {
+          "paints": 9,
+          "puzzles": 2
+        },
+        "final_inventory": {
+          "paints": 9,
+          "puzzles": 3
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Kendall",
+        "to_agent": "Taylor",
+        "object_type": "puzzles",
+        "quantity": 1,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Kendall",
+        "to_agent": "Peyton",
+        "object_type": "puzzles",
+        "quantity": 2,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "paints",
+      "puzzles"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 22,
+    "agents": [
+      {
+        "name": "Sage",
+        "initial_inventory": {
+          "blocks": 5,
+          "papers": 0
+        },
+        "final_inventory": {
+          "blocks": 5,
+          "papers": 2
+        }
+      },
+      {
+        "name": "Riley",
+        "initial_inventory": {
+          "blocks": 6,
+          "papers": 15
+        },
+        "final_inventory": {
+          "blocks": 6,
+          "papers": 15
+        }
+      },
+      {
+        "name": "Nova",
+        "initial_inventory": {
+          "blocks": 4,
+          "papers": 14
+        },
+        "final_inventory": {
+          "blocks": 4,
+          "papers": 12
+        }
+      },
+      {
+        "name": "Robin",
+        "initial_inventory": {
+          "blocks": 0,
+          "papers": 8
+        },
+        "final_inventory": {
+          "blocks": 0,
+          "papers": 8
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Riley",
+        "to_agent": "Sage",
+        "object_type": "papers",
+        "quantity": 2,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Nova",
+        "to_agent": "Riley",
+        "object_type": "papers",
+        "quantity": 2,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "blocks",
+      "papers"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 23,
+    "agents": [
+      {
+        "name": "Sage",
+        "initial_inventory": {
+          "rulers": 0,
+          "bolts": 10
+        },
+        "final_inventory": {
+          "rulers": 0,
+          "bolts": 10
+        }
+      },
+      {
+        "name": "Sage",
+        "initial_inventory": {
+          "rulers": 0,
+          "bolts": 10
+        },
+        "final_inventory": {
+          "rulers": 0,
+          "bolts": 10
+        }
+      },
+      {
+        "name": "Sterling",
+        "initial_inventory": {
+          "rulers": 0,
+          "bolts": 20
+        },
+        "final_inventory": {
+          "rulers": 0,
+          "bolts": 20
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Sage",
+        "to_agent": "Sterling",
+        "object_type": "bolts",
+        "quantity": 1,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Sterling",
+        "to_agent": "Sage",
+        "object_type": "bolts",
+        "quantity": 4,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Sage",
+        "to_agent": "Sterling",
+        "object_type": "bolts",
+        "quantity": 9,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Sterling",
+        "to_agent": "Sage",
+        "object_type": "bolts",
+        "quantity": 6,
+        "transfer_id": 4
+      }
+    ],
+    "object_types": [
+      "rulers",
+      "bolts"
+    ],
+    "total_transfers": 4
+  },
+  {
+    "scenario_id": 24,
+    "agents": [
+      {
+        "name": "Micah",
+        "initial_inventory": {
+          "books": 8,
+          "envelopes": 9
+        },
+        "final_inventory": {
+          "books": 1,
+          "envelopes": 9
+        }
+      },
+      {
+        "name": "Skylar",
+        "initial_inventory": {
+          "books": 0,
+          "envelopes": 7
+        },
+        "final_inventory": {
+          "books": 0,
+          "envelopes": 6
+        }
+      },
+      {
+        "name": "Gray",
+        "initial_inventory": {
+          "books": 6,
+          "envelopes": 12
+        },
+        "final_inventory": {
+          "books": 13,
+          "envelopes": 13
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Skylar",
+        "to_agent": "Gray",
+        "object_type": "envelopes",
+        "quantity": 3,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Gray",
+        "to_agent": "Skylar",
+        "object_type": "envelopes",
+        "quantity": 7,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Micah",
+        "to_agent": "Gray",
+        "object_type": "books",
+        "quantity": 7,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Skylar",
+        "to_agent": "Gray",
+        "object_type": "envelopes",
+        "quantity": 5,
+        "transfer_id": 4
+      }
+    ],
+    "object_types": [
+      "books",
+      "envelopes"
+    ],
+    "total_transfers": 4
+  },
+  {
+    "scenario_id": 25,
+    "agents": [
+      {
+        "name": "Morgan",
+        "initial_inventory": {
+          "clips": 5,
+          "pencils": 0,
+          "shoes": 0
+        },
+        "final_inventory": {
+          "clips": 15,
+          "pencils": 0,
+          "shoes": 8
+        }
+      },
+      {
+        "name": "Finley",
+        "initial_inventory": {
+          "clips": 0,
+          "pencils": 6,
+          "shoes": 9
+        },
+        "final_inventory": {
+          "clips": 0,
+          "pencils": 6,
+          "shoes": 1
+        }
+      },
+      {
+        "name": "Sage",
+        "initial_inventory": {
+          "clips": 10,
+          "pencils": 1,
+          "shoes": 0
+        },
+        "final_inventory": {
+          "clips": 0,
+          "pencils": 1,
+          "shoes": 0
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Finley",
+        "to_agent": "Morgan",
+        "object_type": "shoes",
+        "quantity": 4,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Finley",
+        "to_agent": "Morgan",
+        "object_type": "shoes",
+        "quantity": 2,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Finley",
+        "to_agent": "Morgan",
+        "object_type": "shoes",
+        "quantity": 2,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Sage",
+        "to_agent": "Morgan",
+        "object_type": "clips",
+        "quantity": 10,
+        "transfer_id": 4
+      }
+    ],
+    "object_types": [
+      "clips",
+      "pencils",
+      "shoes"
+    ],
+    "total_transfers": 4
+  },
+  {
+    "scenario_id": 26,
+    "agents": [
+      {
+        "name": "Star",
+        "initial_inventory": {
+          "hammers": 2,
+          "balls": 0,
+          "papers": 1
+        },
+        "final_inventory": {
+          "hammers": 0,
+          "balls": 0,
+          "papers": 0
+        }
+      },
+      {
+        "name": "Micah",
+        "initial_inventory": {
+          "hammers": 1,
+          "balls": 4,
+          "papers": 2
+        },
+        "final_inventory": {
+          "hammers": 3,
+          "balls": 4,
+          "papers": 2
+        }
+      },
+      {
+        "name": "Skylar",
+        "initial_inventory": {
+          "hammers": 0,
+          "balls": 0,
+          "papers": 3
+        },
+        "final_inventory": {
+          "hammers": 0,
+          "balls": 0,
+          "papers": 4
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Micah",
+        "to_agent": "Skylar",
+        "object_type": "balls",
+        "quantity": 1,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Star",
+        "to_agent": "Skylar",
+        "object_type": "papers",
+        "quantity": 1,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Star",
+        "to_agent": "Micah",
+        "object_type": "hammers",
+        "quantity": 2,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Skylar",
+        "to_agent": "Micah",
+        "object_type": "balls",
+        "quantity": 1,
+        "transfer_id": 4
+      }
+    ],
+    "object_types": [
+      "hammers",
+      "balls",
+      "papers"
+    ],
+    "total_transfers": 4
+  },
+  {
+    "scenario_id": 27,
+    "agents": [
+      {
+        "name": "Parker",
+        "initial_inventory": {
+          "stickers": 8,
+          "oranges": 4
+        },
+        "final_inventory": {
+          "stickers": 8,
+          "oranges": 19
+        }
+      },
+      {
+        "name": "Robin",
+        "initial_inventory": {
+          "stickers": 0,
+          "oranges": 7
+        },
+        "final_inventory": {
+          "stickers": 0,
+          "oranges": 0
+        }
+      },
+      {
+        "name": "Taylor",
+        "initial_inventory": {
+          "stickers": 9,
+          "oranges": 4
+        },
+        "final_inventory": {
+          "stickers": 9,
+          "oranges": 0
+        }
+      },
+      {
+        "name": "Remy",
+        "initial_inventory": {
+          "stickers": 1,
+          "oranges": 7
+        },
+        "final_inventory": {
+          "stickers": 1,
+          "oranges": 3
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Taylor",
+        "to_agent": "Remy",
+        "object_type": "oranges",
+        "quantity": 1,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Remy",
+        "to_agent": "Parker",
+        "object_type": "oranges",
+        "quantity": 8,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Robin",
+        "to_agent": "Parker",
+        "object_type": "oranges",
+        "quantity": 7,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Taylor",
+        "to_agent": "Remy",
+        "object_type": "oranges",
+        "quantity": 3,
+        "transfer_id": 4
+      }
+    ],
+    "object_types": [
+      "stickers",
+      "oranges"
+    ],
+    "total_transfers": 4
+  },
+  {
+    "scenario_id": 28,
+    "agents": [
+      {
+        "name": "Remy",
+        "initial_inventory": {
+          "blocks": 4,
+          "cookies": 4,
+          "ribbons": 12
+        },
+        "final_inventory": {
+          "blocks": 2,
+          "cookies": 6,
+          "ribbons": 12
+        }
+      },
+      {
+        "name": "Dakota",
+        "initial_inventory": {
+          "blocks": 0,
+          "cookies": 4,
+          "ribbons": 9
+        },
+        "final_inventory": {
+          "blocks": 7,
+          "cookies": 2,
+          "ribbons": 9
+        }
+      },
+      {
+        "name": "Blue",
+        "initial_inventory": {
+          "blocks": 10,
+          "cookies": 2,
+          "ribbons": 7
+        },
+        "final_inventory": {
+          "blocks": 6,
+          "cookies": 2,
+          "ribbons": 7
+        }
+      },
+      {
+        "name": "Skylar",
+        "initial_inventory": {
+          "blocks": 1,
+          "cookies": 16,
+          "ribbons": 0
+        },
+        "final_inventory": {
+          "blocks": 0,
+          "cookies": 16,
+          "ribbons": 0
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Dakota",
+        "to_agent": "Remy",
+        "object_type": "cookies",
+        "quantity": 2,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Remy",
+        "to_agent": "Dakota",
+        "object_type": "blocks",
+        "quantity": 2,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Blue",
+        "to_agent": "Dakota",
+        "object_type": "blocks",
+        "quantity": 5,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Skylar",
+        "to_agent": "Blue",
+        "object_type": "blocks",
+        "quantity": 1,
+        "transfer_id": 4
+      }
+    ],
+    "object_types": [
+      "blocks",
+      "cookies",
+      "ribbons"
+    ],
+    "total_transfers": 4
+  },
+  {
+    "scenario_id": 29,
+    "agents": [
+      {
+        "name": "Emery",
+        "initial_inventory": {
+          "erasers": 5,
+          "marbles": 0,
+          "cookies": 7
+        },
+        "final_inventory": {
+          "erasers": 5,
+          "marbles": 3,
+          "cookies": 7
+        }
+      },
+      {
+        "name": "Star",
+        "initial_inventory": {
+          "erasers": 3,
+          "marbles": 5,
+          "cookies": 4
+        },
+        "final_inventory": {
+          "erasers": 3,
+          "marbles": 2,
+          "cookies": 5
+        }
+      },
+      {
+        "name": "Lane",
+        "initial_inventory": {
+          "erasers": 0,
+          "marbles": 10,
+          "cookies": 3
+        },
+        "final_inventory": {
+          "erasers": 4,
+          "marbles": 10,
+          "cookies": 2
+        }
+      },
+      {
+        "name": "Finley",
+        "initial_inventory": {
+          "erasers": 9,
+          "marbles": 13,
+          "cookies": 3
+        },
+        "final_inventory": {
+          "erasers": 5,
+          "marbles": 13,
+          "cookies": 3
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Finley",
+        "to_agent": "Lane",
+        "object_type": "erasers",
+        "quantity": 4,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Star",
+        "to_agent": "Emery",
+        "object_type": "marbles",
+        "quantity": 3,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Lane",
+        "to_agent": "Star",
+        "object_type": "cookies",
+        "quantity": 2,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Star",
+        "to_agent": "Lane",
+        "object_type": "cookies",
+        "quantity": 1,
+        "transfer_id": 4
+      }
+    ],
+    "object_types": [
+      "erasers",
+      "marbles",
+      "cookies"
+    ],
+    "total_transfers": 4
+  },
+  {
+    "scenario_id": 30,
+    "agents": [
+      {
+        "name": "Storm",
+        "initial_inventory": {
+          "cards": 4,
+          "erasers": 0
+        },
+        "final_inventory": {
+          "cards": 3,
+          "erasers": 0
+        }
+      },
+      {
+        "name": "Star",
+        "initial_inventory": {
+          "cards": 10,
+          "erasers": 16
+        },
+        "final_inventory": {
+          "cards": 8,
+          "erasers": 16
+        }
+      },
+      {
+        "name": "Jordan",
+        "initial_inventory": {
+          "cards": 7,
+          "erasers": 4
+        },
+        "final_inventory": {
+          "cards": 10,
+          "erasers": 4
+        }
+      },
+      {
+        "name": "Kendall",
+        "initial_inventory": {
+          "cards": 6,
+          "erasers": 0
+        },
+        "final_inventory": {
+          "cards": 6,
+          "erasers": 0
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Jordan",
+        "to_agent": "Star",
+        "object_type": "cards",
+        "quantity": 2,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Jordan",
+        "to_agent": "Star",
+        "object_type": "cards",
+        "quantity": 2,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Star",
+        "to_agent": "Jordan",
+        "object_type": "cards",
+        "quantity": 7,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Storm",
+        "to_agent": "Star",
+        "object_type": "cards",
+        "quantity": 1,
+        "transfer_id": 4
+      }
+    ],
+    "object_types": [
+      "cards",
+      "erasers"
+    ],
+    "total_transfers": 4
+  },
+  {
+    "scenario_id": 31,
+    "agents": [
+      {
+        "name": "Jules",
+        "initial_inventory": {
+          "threads": 5,
+          "ribbons": 2
+        },
+        "final_inventory": {
+          "threads": 5,
+          "ribbons": 0
+        }
+      },
+      {
+        "name": "Wren",
+        "initial_inventory": {
+          "threads": 10,
+          "ribbons": 16
+        },
+        "final_inventory": {
+          "threads": 10,
+          "ribbons": 18
+        }
+      },
+      {
+        "name": "Peyton",
+        "initial_inventory": {
+          "threads": 1,
+          "ribbons": 10
+        },
+        "final_inventory": {
+          "threads": 1,
+          "ribbons": 4
+        }
+      },
+      {
+        "name": "Robin",
+        "initial_inventory": {
+          "threads": 9,
+          "ribbons": 0
+        },
+        "final_inventory": {
+          "threads": 9,
+          "ribbons": 6
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Jules",
+        "to_agent": "Wren",
+        "object_type": "ribbons",
+        "quantity": 2,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Peyton",
+        "to_agent": "Robin",
+        "object_type": "ribbons",
+        "quantity": 6,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "threads",
+      "ribbons"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 32,
+    "agents": [
+      {
+        "name": "Rain",
+        "initial_inventory": {
+          "oranges": 0,
+          "cookies": 3,
+          "blocks": 14
+        },
+        "final_inventory": {
+          "oranges": 0,
+          "cookies": 2,
+          "blocks": 14
+        }
+      },
+      {
+        "name": "Avery",
+        "initial_inventory": {
+          "oranges": 3,
+          "cookies": 0,
+          "blocks": 4
+        },
+        "final_inventory": {
+          "oranges": 2,
+          "cookies": 5,
+          "blocks": 10
+        }
+      },
+      {
+        "name": "Alex",
+        "initial_inventory": {
+          "oranges": 1,
+          "cookies": 0,
+          "blocks": 6
+        },
+        "final_inventory": {
+          "oranges": 2,
+          "cookies": 0,
+          "blocks": 0
+        }
+      },
+      {
+        "name": "Jordan",
+        "initial_inventory": {
+          "oranges": 10,
+          "cookies": 10,
+          "blocks": 0
+        },
+        "final_inventory": {
+          "oranges": 10,
+          "cookies": 6,
+          "blocks": 0
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Avery",
+        "to_agent": "Alex",
+        "object_type": "oranges",
+        "quantity": 1,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Alex",
+        "to_agent": "Avery",
+        "object_type": "blocks",
+        "quantity": 6,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Rain",
+        "to_agent": "Avery",
+        "object_type": "cookies",
+        "quantity": 1,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Jordan",
+        "to_agent": "Avery",
+        "object_type": "cookies",
+        "quantity": 4,
+        "transfer_id": 4
+      }
+    ],
+    "object_types": [
+      "oranges",
+      "cookies",
+      "blocks"
+    ],
+    "total_transfers": 4
+  },
+  {
+    "scenario_id": 33,
+    "agents": [
+      {
+        "name": "Ari",
+        "initial_inventory": {
+          "balls": 0,
+          "brushes": 5,
+          "stamps": 2,
+          "apples": 9
+        },
+        "final_inventory": {
+          "balls": 0,
+          "brushes": 3,
+          "stamps": 2,
+          "apples": 9
+        }
+      },
+      {
+        "name": "Avery",
+        "initial_inventory": {
+          "balls": 5,
+          "brushes": 0,
+          "stamps": 13,
+          "apples": 4
+        },
+        "final_inventory": {
+          "balls": 5,
+          "brushes": 3,
+          "stamps": 4,
+          "apples": 4
+        }
+      },
+      {
+        "name": "Blue",
+        "initial_inventory": {
+          "balls": 11,
+          "brushes": 14,
+          "stamps": 7,
+          "apples": 29
+        },
+        "final_inventory": {
+          "balls": 11,
+          "brushes": 10,
+          "stamps": 16,
+          "apples": 29
+        }
+      },
+      {
+        "name": "Remy",
+        "initial_inventory": {
+          "balls": 10,
+          "brushes": 25,
+          "stamps": 23,
+          "apples": 4
+        },
+        "final_inventory": {
+          "balls": 10,
+          "brushes": 25,
+          "stamps": 23,
+          "apples": 4
+        }
+      },
+      {
+        "name": "Vale",
+        "initial_inventory": {
+          "balls": 0,
+          "brushes": 0,
+          "stamps": 1,
+          "apples": 11
+        },
+        "final_inventory": {
+          "balls": 0,
+          "brushes": 0,
+          "stamps": 1,
+          "apples": 11
+        }
+      },
+      {
+        "name": "Logan",
+        "initial_inventory": {
+          "balls": 0,
+          "brushes": 0,
+          "stamps": 11,
+          "apples": 13
+        },
+        "final_inventory": {
+          "balls": 0,
+          "brushes": 3,
+          "stamps": 11,
+          "apples": 13
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Ari",
+        "to_agent": "Logan",
+        "object_type": "brushes",
+        "quantity": 2,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Blue",
+        "to_agent": "Logan",
+        "object_type": "brushes",
+        "quantity": 4,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Logan",
+        "to_agent": "Vale",
+        "object_type": "brushes",
+        "quantity": 3,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Avery",
+        "to_agent": "Blue",
+        "object_type": "stamps",
+        "quantity": 9,
+        "transfer_id": 4
+      },
+      {
+        "from_agent": "Vale",
+        "to_agent": "Avery",
+        "object_type": "brushes",
+        "quantity": 3,
+        "transfer_id": 5
+      }
+    ],
+    "object_types": [
+      "balls",
+      "brushes",
+      "stamps",
+      "apples"
+    ],
+    "total_transfers": 5
+  },
+  {
+    "scenario_id": 34,
+    "agents": [
+      {
+        "name": "Morgan",
+        "initial_inventory": {
+          "cards": 20,
+          "notebooks": 3,
+          "brushes": 0
+        },
+        "final_inventory": {
+          "cards": 20,
+          "notebooks": 5,
+          "brushes": 1
+        }
+      },
+      {
+        "name": "Lane",
+        "initial_inventory": {
+          "cards": 12,
+          "notebooks": 3,
+          "brushes": 5
+        },
+        "final_inventory": {
+          "cards": 3,
+          "notebooks": 1,
+          "brushes": 4
+        }
+      },
+      {
+        "name": "Storm",
+        "initial_inventory": {
+          "cards": 26,
+          "notebooks": 4,
+          "brushes": 22
+        },
+        "final_inventory": {
+          "cards": 31,
+          "notebooks": 4,
+          "brushes": 22
+        }
+      },
+      {
+        "name": "Jamie",
+        "initial_inventory": {
+          "cards": 10,
+          "notebooks": 0,
+          "brushes": 3
+        },
+        "final_inventory": {
+          "cards": 10,
+          "notebooks": 0,
+          "brushes": 3
+        }
+      },
+      {
+        "name": "Star",
+        "initial_inventory": {
+          "cards": 4,
+          "notebooks": 12,
+          "brushes": 0
+        },
+        "final_inventory": {
+          "cards": 8,
+          "notebooks": 12,
+          "brushes": 0
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Lane",
+        "to_agent": "Star",
+        "object_type": "cards",
+        "quantity": 4,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Lane",
+        "to_agent": "Morgan",
+        "object_type": "brushes",
+        "quantity": 1,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Lane",
+        "to_agent": "Morgan",
+        "object_type": "notebooks",
+        "quantity": 2,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Lane",
+        "to_agent": "Storm",
+        "object_type": "cards",
+        "quantity": 4,
+        "transfer_id": 4
+      },
+      {
+        "from_agent": "Lane",
+        "to_agent": "Storm",
+        "object_type": "cards",
+        "quantity": 1,
+        "transfer_id": 5
+      }
+    ],
+    "object_types": [
+      "cards",
+      "notebooks",
+      "brushes"
+    ],
+    "total_transfers": 5
+  },
+  {
+    "scenario_id": 35,
+    "agents": [
+      {
+        "name": "Moon",
+        "initial_inventory": {
+          "sandwiches": 8,
+          "beads": 8,
+          "papers": 2,
+          "candies": 0,
+          "pencils": 1
+        },
+        "final_inventory": {
+          "sandwiches": 8,
+          "beads": 0,
+          "papers": 1,
+          "candies": 0,
+          "pencils": 0
+        }
+      },
+      {
+        "name": "Alex",
+        "initial_inventory": {
+          "sandwiches": 4,
+          "beads": 5,
+          "papers": 9,
+          "candies": 3,
+          "pencils": 28
+        },
+        "final_inventory": {
+          "sandwiches": 4,
+          "beads": 13,
+          "papers": 9,
+          "candies": 1,
+          "pencils": 21
+        }
+      },
+      {
+        "name": "Blue",
+        "initial_inventory": {
+          "sandwiches": 0,
+          "beads": 0,
+          "papers": 7,
+          "candies": 15,
+          "pencils": 5
+        },
+        "final_inventory": {
+          "sandwiches": 0,
+          "beads": 0,
+          "papers": 7,
+          "candies": 15,
+          "pencils": 5
+        }
+      },
+      {
+        "name": "Reese",
+        "initial_inventory": {
+          "sandwiches": 8,
+          "beads": 0,
+          "papers": 9,
+          "candies": 0,
+          "pencils": 5
+        },
+        "final_inventory": {
+          "sandwiches": 8,
+          "beads": 1,
+          "papers": 10,
+          "candies": 0,
+          "pencils": 5
+        }
+      },
+      {
+        "name": "Jordan",
+        "initial_inventory": {
+          "sandwiches": 26,
+          "beads": 1,
+          "papers": 13,
+          "candies": 7,
+          "pencils": 11
+        },
+        "final_inventory": {
+          "sandwiches": 26,
+          "beads": 0,
+          "papers": 13,
+          "candies": 7,
+          "pencils": 6
+        }
+      },
+      {
+        "name": "Tatum",
+        "initial_inventory": {
+          "sandwiches": 0,
+          "beads": 21,
+          "papers": 23,
+          "candies": 8,
+          "pencils": 23
+        },
+        "final_inventory": {
+          "sandwiches": 0,
+          "beads": 21,
+          "papers": 23,
+          "candies": 10,
+          "pencils": 36
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Jordan",
+        "to_agent": "Reese",
+        "object_type": "beads",
+        "quantity": 1,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Alex",
+        "to_agent": "Tatum",
+        "object_type": "pencils",
+        "quantity": 7,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Alex",
+        "to_agent": "Tatum",
+        "object_type": "candies",
+        "quantity": 2,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Moon",
+        "to_agent": "Alex",
+        "object_type": "beads",
+        "quantity": 8,
+        "transfer_id": 4
+      },
+      {
+        "from_agent": "Moon",
+        "to_agent": "Jordan",
+        "object_type": "pencils",
+        "quantity": 1,
+        "transfer_id": 5
+      },
+      {
+        "from_agent": "Moon",
+        "to_agent": "Reese",
+        "object_type": "papers",
+        "quantity": 1,
+        "transfer_id": 6
+      },
+      {
+        "from_agent": "Jordan",
+        "to_agent": "Tatum",
+        "object_type": "pencils",
+        "quantity": 6,
+        "transfer_id": 7
+      }
+    ],
+    "object_types": [
+      "sandwiches",
+      "beads",
+      "papers",
+      "candies",
+      "pencils"
+    ],
+    "total_transfers": 7
+  },
+  {
+    "scenario_id": 36,
+    "agents": [
+      {
+        "name": "Moon",
+        "initial_inventory": {
+          "notebooks": 0,
+          "threads": 4,
+          "staples": 7
+        },
+        "final_inventory": {
+          "notebooks": 0,
+          "threads": 8,
+          "staples": 7
+        }
+      },
+      {
+        "name": "Skylar",
+        "initial_inventory": {
+          "notebooks": 23,
+          "threads": 30,
+          "staples": 10
+        },
+        "final_inventory": {
+          "notebooks": 23,
+          "threads": 34,
+          "staples": 9
+        }
+      },
+      {
+        "name": "Tatum",
+        "initial_inventory": {
+          "notebooks": 0,
+          "threads": 0,
+          "staples": 9
+        },
+        "final_inventory": {
+          "notebooks": 0,
+          "threads": 1,
+          "staples": 9
+        }
+      },
+      {
+        "name": "Ari",
+        "initial_inventory": {
+          "notebooks": 14,
+          "threads": 8,
+          "staples": 12
+        },
+        "final_inventory": {
+          "notebooks": 15,
+          "threads": 1,
+          "staples": 13
+        }
+      },
+      {
+        "name": "Morgan",
+        "initial_inventory": {
+          "notebooks": 1,
+          "threads": 4,
+          "staples": 14
+        },
+        "final_inventory": {
+          "notebooks": 0,
+          "threads": 2,
+          "staples": 14
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Skylar",
+        "to_agent": "Ari",
+        "object_type": "staples",
+        "quantity": 1,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Moon",
+        "to_agent": "Skylar",
+        "object_type": "threads",
+        "quantity": 3,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Morgan",
+        "to_agent": "Tatum",
+        "object_type": "threads",
+        "quantity": 2,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Tatum",
+        "to_agent": "Skylar",
+        "object_type": "threads",
+        "quantity": 1,
+        "transfer_id": 4
+      },
+      {
+        "from_agent": "Morgan",
+        "to_agent": "Ari",
+        "object_type": "notebooks",
+        "quantity": 1,
+        "transfer_id": 5
+      },
+      {
+        "from_agent": "Ari",
+        "to_agent": "Moon",
+        "object_type": "threads",
+        "quantity": 7,
+        "transfer_id": 6
+      }
+    ],
+    "object_types": [
+      "notebooks",
+      "threads",
+      "staples"
+    ],
+    "total_transfers": 6
+  },
+  {
+    "scenario_id": 37,
+    "agents": [
+      {
+        "name": "Riley",
+        "initial_inventory": {
+          "pencils": 0,
+          "oranges": 5,
+          "bats": 10
+        },
+        "final_inventory": {
+          "pencils": 0,
+          "oranges": 5,
+          "bats": 15
+        }
+      },
+      {
+        "name": "Quinn",
+        "initial_inventory": {
+          "pencils": 15,
+          "oranges": 21,
+          "bats": 3
+        },
+        "final_inventory": {
+          "pencils": 8,
+          "oranges": 21,
+          "bats": 2
+        }
+      },
+      {
+        "name": "Drew",
+        "initial_inventory": {
+          "pencils": 6,
+          "oranges": 7,
+          "bats": 16
+        },
+        "final_inventory": {
+          "pencils": 6,
+          "oranges": 7,
+          "bats": 20
+        }
+      },
+      {
+        "name": "Rain",
+        "initial_inventory": {
+          "pencils": 7,
+          "oranges": 26,
+          "bats": 26
+        },
+        "final_inventory": {
+          "pencils": 14,
+          "oranges": 26,
+          "bats": 18
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Drew",
+        "to_agent": "Riley",
+        "object_type": "bats",
+        "quantity": 5,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Rain",
+        "to_agent": "Drew",
+        "object_type": "bats",
+        "quantity": 8,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Quinn",
+        "to_agent": "Drew",
+        "object_type": "bats",
+        "quantity": 1,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Quinn",
+        "to_agent": "Rain",
+        "object_type": "pencils",
+        "quantity": 7,
+        "transfer_id": 4
+      }
+    ],
+    "object_types": [
+      "pencils",
+      "oranges",
+      "bats"
+    ],
+    "total_transfers": 4
+  },
+  {
+    "scenario_id": 38,
+    "agents": [
+      {
+        "name": "Moon",
+        "initial_inventory": {
+          "cards": 5,
+          "stickers": 15,
+          "wrenches": 4,
+          "gloves": 14,
+          "shoes": 0
+        },
+        "final_inventory": {
+          "cards": 5,
+          "stickers": 15,
+          "wrenches": 4,
+          "gloves": 14,
+          "shoes": 9
+        }
+      },
+      {
+        "name": "Tatum",
+        "initial_inventory": {
+          "cards": 5,
+          "stickers": 20,
+          "wrenches": 0,
+          "gloves": 27,
+          "shoes": 8
+        },
+        "final_inventory": {
+          "cards": 5,
+          "stickers": 13,
+          "wrenches": 0,
+          "gloves": 28,
+          "shoes": 8
+        }
+      },
+      {
+        "name": "Alex",
+        "initial_inventory": {
+          "cards": 0,
+          "stickers": 6,
+          "wrenches": 29,
+          "gloves": 1,
+          "shoes": 12
+        },
+        "final_inventory": {
+          "cards": 0,
+          "stickers": 14,
+          "wrenches": 32,
+          "gloves": 0,
+          "shoes": 3
+        }
+      },
+      {
+        "name": "Nova",
+        "initial_inventory": {
+          "cards": 29,
+          "stickers": 5,
+          "wrenches": 3,
+          "gloves": 22,
+          "shoes": 2
+        },
+        "final_inventory": {
+          "cards": 29,
+          "stickers": 4,
+          "wrenches": 0,
+          "gloves": 22,
+          "shoes": 2
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Alex",
+        "to_agent": "Moon",
+        "object_type": "shoes",
+        "quantity": 9,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Tatum",
+        "to_agent": "Alex",
+        "object_type": "stickers",
+        "quantity": 8,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Alex",
+        "to_agent": "Tatum",
+        "object_type": "gloves",
+        "quantity": 1,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Nova",
+        "to_agent": "Tatum",
+        "object_type": "stickers",
+        "quantity": 1,
+        "transfer_id": 4
+      },
+      {
+        "from_agent": "Nova",
+        "to_agent": "Alex",
+        "object_type": "wrenches",
+        "quantity": 3,
+        "transfer_id": 5
+      }
+    ],
+    "object_types": [
+      "cards",
+      "stickers",
+      "wrenches",
+      "gloves",
+      "shoes"
+    ],
+    "total_transfers": 5
+  },
+  {
+    "scenario_id": 39,
+    "agents": [
+      {
+        "name": "Nova",
+        "initial_inventory": {
+          "apples": 0,
+          "pens": 16,
+          "shoes": 12
+        },
+        "final_inventory": {
+          "apples": 10,
+          "pens": 16,
+          "shoes": 12
+        }
+      },
+      {
+        "name": "Tatum",
+        "initial_inventory": {
+          "apples": 6,
+          "pens": 27,
+          "shoes": 15
+        },
+        "final_inventory": {
+          "apples": 7,
+          "pens": 27,
+          "shoes": 22
+        }
+      },
+      {
+        "name": "Emery",
+        "initial_inventory": {
+          "apples": 2,
+          "pens": 2,
+          "shoes": 1
+        },
+        "final_inventory": {
+          "apples": 2,
+          "pens": 3,
+          "shoes": 1
+        }
+      },
+      {
+        "name": "Moon",
+        "initial_inventory": {
+          "apples": 0,
+          "pens": 1,
+          "shoes": 0
+        },
+        "final_inventory": {
+          "apples": 7,
+          "pens": 1,
+          "shoes": 0
+        }
+      },
+      {
+        "name": "Kai",
+        "initial_inventory": {
+          "apples": 3,
+          "pens": 0,
+          "shoes": 10
+        },
+        "final_inventory": {
+          "apples": 0,
+          "pens": 0,
+          "shoes": 3
+        }
+      },
+      {
+        "name": "Rowan",
+        "initial_inventory": {
+          "apples": 15,
+          "pens": 1,
+          "shoes": 1
+        },
+        "final_inventory": {
+          "apples": 0,
+          "pens": 0,
+          "shoes": 1
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Kai",
+        "to_agent": "Tatum",
+        "object_type": "apples",
+        "quantity": 1,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Kai",
+        "to_agent": "Rowan",
+        "object_type": "apples",
+        "quantity": 2,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Kai",
+        "to_agent": "Tatum",
+        "object_type": "shoes",
+        "quantity": 7,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Rowan",
+        "to_agent": "Emery",
+        "object_type": "pens",
+        "quantity": 1,
+        "transfer_id": 4
+      },
+      {
+        "from_agent": "Rowan",
+        "to_agent": "Nova",
+        "object_type": "apples",
+        "quantity": 10,
+        "transfer_id": 5
+      },
+      {
+        "from_agent": "Rowan",
+        "to_agent": "Moon",
+        "object_type": "apples",
+        "quantity": 7,
+        "transfer_id": 6
+      }
+    ],
+    "object_types": [
+      "apples",
+      "pens",
+      "shoes"
+    ],
+    "total_transfers": 6
+  },
+  {
+    "scenario_id": 40,
+    "agents": [
+      {
+        "name": "Kendall",
+        "initial_inventory": {
+          "shoes": 23,
+          "oranges": 7,
+          "pens": 0,
+          "rulers": 21
+        },
+        "final_inventory": {
+          "shoes": 23,
+          "oranges": 4,
+          "pens": 1,
+          "rulers": 21
+        }
+      },
+      {
+        "name": "Logan",
+        "initial_inventory": {
+          "shoes": 0,
+          "oranges": 9,
+          "pens": 9,
+          "rulers": 30
+        },
+        "final_inventory": {
+          "shoes": 0,
+          "oranges": 13,
+          "pens": 9,
+          "rulers": 37
+        }
+      },
+      {
+        "name": "Tatum",
+        "initial_inventory": {
+          "shoes": 24,
+          "oranges": 4,
+          "pens": 7,
+          "rulers": 2
+        },
+        "final_inventory": {
+          "shoes": 24,
+          "oranges": 0,
+          "pens": 7,
+          "rulers": 2
+        }
+      },
+      {
+        "name": "Drew",
+        "initial_inventory": {
+          "shoes": 0,
+          "oranges": 1,
+          "pens": 16,
+          "rulers": 20
+        },
+        "final_inventory": {
+          "shoes": 0,
+          "oranges": 1,
+          "pens": 17,
+          "rulers": 20
+        }
+      },
+      {
+        "name": "Finley",
+        "initial_inventory": {
+          "shoes": 0,
+          "oranges": 18,
+          "pens": 3,
+          "rulers": 7
+        },
+        "final_inventory": {
+          "shoes": 0,
+          "oranges": 21,
+          "pens": 1,
+          "rulers": 0
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Kendall",
+        "to_agent": "Logan",
+        "object_type": "oranges",
+        "quantity": 7,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Logan",
+        "to_agent": "Drew",
+        "object_type": "pens",
+        "quantity": 1,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Finley",
+        "to_agent": "Logan",
+        "object_type": "pens",
+        "quantity": 2,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Logan",
+        "to_agent": "Finley",
+        "object_type": "oranges",
+        "quantity": 3,
+        "transfer_id": 4
+      },
+      {
+        "from_agent": "Finley",
+        "to_agent": "Logan",
+        "object_type": "rulers",
+        "quantity": 7,
+        "transfer_id": 5
+      },
+      {
+        "from_agent": "Logan",
+        "to_agent": "Kendall",
+        "object_type": "pens",
+        "quantity": 1,
+        "transfer_id": 6
+      },
+      {
+        "from_agent": "Tatum",
+        "to_agent": "Kendall",
+        "object_type": "oranges",
+        "quantity": 4,
+        "transfer_id": 7
+      }
+    ],
+    "object_types": [
+      "shoes",
+      "oranges",
+      "pens",
+      "rulers"
+    ],
+    "total_transfers": 7
+  },
+  {
+    "scenario_id": 41,
+    "agents": [
+      {
+        "name": "Sage",
+        "initial_inventory": {
+          "jerseys": 2,
+          "pencils": 17,
+          "rulers": 20,
+          "brushes": 11,
+          "marbles": 3
+        },
+        "final_inventory": {
+          "jerseys": 2,
+          "pencils": 17,
+          "rulers": 20,
+          "brushes": 3,
+          "marbles": 3
+        }
+      },
+      {
+        "name": "Cameron",
+        "initial_inventory": {
+          "jerseys": 14,
+          "pencils": 5,
+          "rulers": 4,
+          "brushes": 8,
+          "marbles": 11
+        },
+        "final_inventory": {
+          "jerseys": 14,
+          "pencils": 5,
+          "rulers": 5,
+          "brushes": 8,
+          "marbles": 11
+        }
+      },
+      {
+        "name": "Parker",
+        "initial_inventory": {
+          "jerseys": 26,
+          "pencils": 7,
+          "rulers": 12,
+          "brushes": 0,
+          "marbles": 2
+        },
+        "final_inventory": {
+          "jerseys": 22,
+          "pencils": 7,
+          "rulers": 11,
+          "brushes": 0,
+          "marbles": 2
+        }
+      },
+      {
+        "name": "Alex",
+        "initial_inventory": {
+          "jerseys": 4,
+          "pencils": 0,
+          "rulers": 12,
+          "brushes": 25,
+          "marbles": 24
+        },
+        "final_inventory": {
+          "jerseys": 4,
+          "pencils": 0,
+          "rulers": 13,
+          "brushes": 25,
+          "marbles": 24
+        }
+      },
+      {
+        "name": "Reese",
+        "initial_inventory": {
+          "jerseys": 30,
+          "pencils": 7,
+          "rulers": 0,
+          "brushes": 0,
+          "marbles": 0
+        },
+        "final_inventory": {
+          "jerseys": 30,
+          "pencils": 7,
+          "rulers": 0,
+          "brushes": 0,
+          "marbles": 0
+        }
+      },
+      {
+        "name": "Robin",
+        "initial_inventory": {
+          "jerseys": 7,
+          "pencils": 25,
+          "rulers": 7,
+          "brushes": 21,
+          "marbles": 10
+        },
+        "final_inventory": {
+          "jerseys": 11,
+          "pencils": 25,
+          "rulers": 6,
+          "brushes": 29,
+          "marbles": 10
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Robin",
+        "to_agent": "Reese",
+        "object_type": "rulers",
+        "quantity": 1,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Reese",
+        "to_agent": "Alex",
+        "object_type": "rulers",
+        "quantity": 1,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Robin",
+        "to_agent": "Sage",
+        "object_type": "jerseys",
+        "quantity": 2,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Robin",
+        "to_agent": "Sage",
+        "object_type": "brushes",
+        "quantity": 2,
+        "transfer_id": 4
+      },
+      {
+        "from_agent": "Parker",
+        "to_agent": "Robin",
+        "object_type": "jerseys",
+        "quantity": 4,
+        "transfer_id": 5
+      },
+      {
+        "from_agent": "Parker",
+        "to_agent": "Cameron",
+        "object_type": "rulers",
+        "quantity": 1,
+        "transfer_id": 6
+      },
+      {
+        "from_agent": "Sage",
+        "to_agent": "Robin",
+        "object_type": "brushes",
+        "quantity": 10,
+        "transfer_id": 7
+      },
+      {
+        "from_agent": "Sage",
+        "to_agent": "Robin",
+        "object_type": "jerseys",
+        "quantity": 2,
+        "transfer_id": 8
+      }
+    ],
+    "object_types": [
+      "jerseys",
+      "pencils",
+      "rulers",
+      "brushes",
+      "marbles"
+    ],
+    "total_transfers": 8
+  },
+  {
+    "scenario_id": 42,
+    "agents": [
+      {
+        "name": "Phoenix",
+        "initial_inventory": {
+          "screws": 12,
+          "blocks": 27,
+          "folders": 12
+        },
+        "final_inventory": {
+          "screws": 12,
+          "blocks": 27,
+          "folders": 18
+        }
+      },
+      {
+        "name": "Jordan",
+        "initial_inventory": {
+          "screws": 19,
+          "blocks": 3,
+          "folders": 15
+        },
+        "final_inventory": {
+          "screws": 10,
+          "blocks": 3,
+          "folders": 4
+        }
+      },
+      {
+        "name": "Quinn",
+        "initial_inventory": {
+          "screws": 13,
+          "blocks": 5,
+          "folders": 27
+        },
+        "final_inventory": {
+          "screws": 10,
+          "blocks": 5,
+          "folders": 32
+        }
+      },
+      {
+        "name": "Ari",
+        "initial_inventory": {
+          "screws": 21,
+          "blocks": 14,
+          "folders": 28
+        },
+        "final_inventory": {
+          "screws": 33,
+          "blocks": 14,
+          "folders": 28
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Jordan",
+        "to_agent": "Phoenix",
+        "object_type": "folders",
+        "quantity": 6,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Jordan",
+        "to_agent": "Ari",
+        "object_type": "screws",
+        "quantity": 9,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Quinn",
+        "to_agent": "Ari",
+        "object_type": "screws",
+        "quantity": 3,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Jordan",
+        "to_agent": "Phoenix",
+        "object_type": "folders",
+        "quantity": 5,
+        "transfer_id": 4
+      },
+      {
+        "from_agent": "Phoenix",
+        "to_agent": "Quinn",
+        "object_type": "folders",
+        "quantity": 5,
+        "transfer_id": 5
+      }
+    ],
+    "object_types": [
+      "screws",
+      "blocks",
+      "folders"
+    ],
+    "total_transfers": 5
+  },
+  {
+    "scenario_id": 43,
+    "agents": [
+      {
+        "name": "Morgan",
+        "initial_inventory": {
+          "toys": 0,
+          "bolts": 0,
+          "shoes": 19,
+          "balls": 9,
+          "apples": 3
+        },
+        "final_inventory": {
+          "toys": 0,
+          "bolts": 0,
+          "shoes": 19,
+          "balls": 9,
+          "apples": 3
+        }
+      },
+      {
+        "name": "Alex",
+        "initial_inventory": {
+          "toys": 5,
+          "bolts": 9,
+          "shoes": 2,
+          "balls": 15,
+          "apples": 0
+        },
+        "final_inventory": {
+          "toys": 5,
+          "bolts": 9,
+          "shoes": 6,
+          "balls": 15,
+          "apples": 0
+        }
+      },
+      {
+        "name": "Nova",
+        "initial_inventory": {
+          "toys": 12,
+          "bolts": 15,
+          "shoes": 14,
+          "balls": 7,
+          "apples": 6
+        },
+        "final_inventory": {
+          "toys": 12,
+          "bolts": 15,
+          "shoes": 4,
+          "balls": 16,
+          "apples": 6
+        }
+      },
+      {
+        "name": "Blake",
+        "initial_inventory": {
+          "toys": 0,
+          "bolts": 13,
+          "shoes": 17,
+          "balls": 0,
+          "apples": 23
+        },
+        "final_inventory": {
+          "toys": 0,
+          "bolts": 13,
+          "shoes": 17,
+          "balls": 6,
+          "apples": 23
+        }
+      },
+      {
+        "name": "Lane",
+        "initial_inventory": {
+          "toys": 7,
+          "bolts": 0,
+          "shoes": 4,
+          "balls": 15,
+          "apples": 11
+        },
+        "final_inventory": {
+          "toys": 7,
+          "bolts": 0,
+          "shoes": 10,
+          "balls": 0,
+          "apples": 11
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Lane",
+        "to_agent": "Nova",
+        "object_type": "balls",
+        "quantity": 9,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Lane",
+        "to_agent": "Blake",
+        "object_type": "balls",
+        "quantity": 6,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Nova",
+        "to_agent": "Lane",
+        "object_type": "shoes",
+        "quantity": 6,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Nova",
+        "to_agent": "Alex",
+        "object_type": "shoes",
+        "quantity": 4,
+        "transfer_id": 4
+      }
+    ],
+    "object_types": [
+      "toys",
+      "bolts",
+      "shoes",
+      "balls",
+      "apples"
+    ],
+    "total_transfers": 4
+  },
+  {
+    "scenario_id": 44,
+    "agents": [
+      {
+        "name": "Phoenix",
+        "initial_inventory": {
+          "folders": 0,
+          "staples": 22,
+          "pens": 16,
+          "candies": 3
+        },
+        "final_inventory": {
+          "folders": 0,
+          "staples": 24,
+          "pens": 25,
+          "candies": 3
+        }
+      },
+      {
+        "name": "Dakota",
+        "initial_inventory": {
+          "folders": 0,
+          "staples": 0,
+          "pens": 11,
+          "candies": 1
+        },
+        "final_inventory": {
+          "folders": 0,
+          "staples": 3,
+          "pens": 4,
+          "candies": 1
+        }
+      },
+      {
+        "name": "Logan",
+        "initial_inventory": {
+          "folders": 15,
+          "staples": 0,
+          "pens": 5,
+          "candies": 0
+        },
+        "final_inventory": {
+          "folders": 15,
+          "staples": 0,
+          "pens": 3,
+          "candies": 0
+        }
+      },
+      {
+        "name": "Kai",
+        "initial_inventory": {
+          "folders": 0,
+          "staples": 27,
+          "pens": 1,
+          "candies": 13
+        },
+        "final_inventory": {
+          "folders": 0,
+          "staples": 22,
+          "pens": 1,
+          "candies": 13
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Kai",
+        "to_agent": "Dakota",
+        "object_type": "staples",
+        "quantity": 5,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Dakota",
+        "to_agent": "Logan",
+        "object_type": "pens",
+        "quantity": 7,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Dakota",
+        "to_agent": "Phoenix",
+        "object_type": "staples",
+        "quantity": 2,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Logan",
+        "to_agent": "Phoenix",
+        "object_type": "pens",
+        "quantity": 9,
+        "transfer_id": 4
+      }
+    ],
+    "object_types": [
+      "folders",
+      "staples",
+      "pens",
+      "candies"
+    ],
+    "total_transfers": 4
+  },
+  {
+    "scenario_id": 45,
+    "agents": [
+      {
+        "name": "Blake",
+        "initial_inventory": {
+          "oranges": 0,
+          "puzzles": 25,
+          "buttons": 22,
+          "helmets": 28,
+          "envelopes": 3
+        },
+        "final_inventory": {
+          "oranges": 0,
+          "puzzles": 25,
+          "buttons": 17,
+          "helmets": 28,
+          "envelopes": 2
+        }
+      },
+      {
+        "name": "Drew",
+        "initial_inventory": {
+          "oranges": 5,
+          "puzzles": 30,
+          "buttons": 13,
+          "helmets": 6,
+          "envelopes": 3
+        },
+        "final_inventory": {
+          "oranges": 5,
+          "puzzles": 30,
+          "buttons": 13,
+          "helmets": 4,
+          "envelopes": 3
+        }
+      },
+      {
+        "name": "Emery",
+        "initial_inventory": {
+          "oranges": 15,
+          "puzzles": 2,
+          "buttons": 1,
+          "helmets": 27,
+          "envelopes": 11
+        },
+        "final_inventory": {
+          "oranges": 15,
+          "puzzles": 2,
+          "buttons": 6,
+          "helmets": 27,
+          "envelopes": 16
+        }
+      },
+      {
+        "name": "Taylor",
+        "initial_inventory": {
+          "oranges": 5,
+          "puzzles": 2,
+          "buttons": 8,
+          "helmets": 9,
+          "envelopes": 13
+        },
+        "final_inventory": {
+          "oranges": 5,
+          "puzzles": 2,
+          "buttons": 8,
+          "helmets": 11,
+          "envelopes": 14
+        }
+      },
+      {
+        "name": "Jamie",
+        "initial_inventory": {
+          "oranges": 1,
+          "puzzles": 5,
+          "buttons": 4,
+          "helmets": 15,
+          "envelopes": 12
+        },
+        "final_inventory": {
+          "oranges": 1,
+          "puzzles": 5,
+          "buttons": 4,
+          "helmets": 15,
+          "envelopes": 7
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Jamie",
+        "to_agent": "Emery",
+        "object_type": "envelopes",
+        "quantity": 5,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Blake",
+        "to_agent": "Taylor",
+        "object_type": "envelopes",
+        "quantity": 1,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Drew",
+        "to_agent": "Taylor",
+        "object_type": "helmets",
+        "quantity": 2,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Blake",
+        "to_agent": "Emery",
+        "object_type": "buttons",
+        "quantity": 5,
+        "transfer_id": 4
+      }
+    ],
+    "object_types": [
+      "oranges",
+      "puzzles",
+      "buttons",
+      "helmets",
+      "envelopes"
+    ],
+    "total_transfers": 4
+  },
+  {
+    "scenario_id": 46,
+    "agents": [
+      {
+        "name": "Jamie",
+        "initial_inventory": {
+          "candies": 8,
+          "bolts": 13,
+          "jerseys": 0,
+          "notebooks": 7,
+          "books": 11
+        },
+        "final_inventory": {
+          "candies": 6,
+          "bolts": 12,
+          "jerseys": 0,
+          "notebooks": 13,
+          "books": 21
+        }
+      },
+      {
+        "name": "Ari",
+        "initial_inventory": {
+          "candies": 25,
+          "bolts": 23,
+          "jerseys": 1,
+          "notebooks": 24,
+          "books": 27
+        },
+        "final_inventory": {
+          "candies": 35,
+          "bolts": 23,
+          "jerseys": 1,
+          "notebooks": 8,
+          "books": 20
+        }
+      },
+      {
+        "name": "Sage",
+        "initial_inventory": {
+          "candies": 9,
+          "bolts": 15,
+          "jerseys": 0,
+          "notebooks": 28,
+          "books": 30
+        },
+        "final_inventory": {
+          "candies": 1,
+          "bolts": 15,
+          "jerseys": 0,
+          "notebooks": 28,
+          "books": 30
+        }
+      },
+      {
+        "name": "Alex",
+        "initial_inventory": {
+          "candies": 13,
+          "bolts": 10,
+          "jerseys": 0,
+          "notebooks": 21,
+          "books": 3
+        },
+        "final_inventory": {
+          "candies": 13,
+          "bolts": 11,
+          "jerseys": 0,
+          "notebooks": 31,
+          "books": 0
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Sage",
+        "to_agent": "Ari",
+        "object_type": "candies",
+        "quantity": 7,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Sage",
+        "to_agent": "Ari",
+        "object_type": "candies",
+        "quantity": 1,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Jamie",
+        "to_agent": "Alex",
+        "object_type": "bolts",
+        "quantity": 1,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Jamie",
+        "to_agent": "Ari",
+        "object_type": "candies",
+        "quantity": 2,
+        "transfer_id": 4
+      },
+      {
+        "from_agent": "Ari",
+        "to_agent": "Jamie",
+        "object_type": "books",
+        "quantity": 7,
+        "transfer_id": 5
+      },
+      {
+        "from_agent": "Ari",
+        "to_agent": "Alex",
+        "object_type": "notebooks",
+        "quantity": 10,
+        "transfer_id": 6
+      },
+      {
+        "from_agent": "Alex",
+        "to_agent": "Jamie",
+        "object_type": "books",
+        "quantity": 3,
+        "transfer_id": 7
+      },
+      {
+        "from_agent": "Ari",
+        "to_agent": "Jamie",
+        "object_type": "notebooks",
+        "quantity": 6,
+        "transfer_id": 8
+      }
+    ],
+    "object_types": [
+      "candies",
+      "bolts",
+      "jerseys",
+      "notebooks",
+      "books"
+    ],
+    "total_transfers": 8
+  },
+  {
+    "scenario_id": 47,
+    "agents": [
+      {
+        "name": "Phoenix",
+        "initial_inventory": {
+          "brushes": 0,
+          "ribbons": 30,
+          "helmets": 15,
+          "beads": 0,
+          "marbles": 7
+        },
+        "final_inventory": {
+          "brushes": 4,
+          "ribbons": 30,
+          "helmets": 13,
+          "beads": 0,
+          "marbles": 7
+        }
+      },
+      {
+        "name": "Remy",
+        "initial_inventory": {
+          "brushes": 1,
+          "ribbons": 9,
+          "helmets": 5,
+          "beads": 6,
+          "marbles": 4
+        },
+        "final_inventory": {
+          "brushes": 0,
+          "ribbons": 9,
+          "helmets": 1,
+          "beads": 6,
+          "marbles": 4
+        }
+      },
+      {
+        "name": "Moon",
+        "initial_inventory": {
+          "brushes": 6,
+          "ribbons": 0,
+          "helmets": 0,
+          "beads": 0,
+          "marbles": 15
+        },
+        "final_inventory": {
+          "brushes": 0,
+          "ribbons": 0,
+          "helmets": 0,
+          "beads": 0,
+          "marbles": 15
+        }
+      },
+      {
+        "name": "Parker",
+        "initial_inventory": {
+          "brushes": 16,
+          "ribbons": 18,
+          "helmets": 2,
+          "beads": 27,
+          "marbles": 5
+        },
+        "final_inventory": {
+          "brushes": 19,
+          "ribbons": 18,
+          "helmets": 11,
+          "beads": 27,
+          "marbles": 0
+        }
+      },
+      {
+        "name": "Peyton",
+        "initial_inventory": {
+          "brushes": 25,
+          "ribbons": 1,
+          "helmets": 14,
+          "beads": 0,
+          "marbles": 12
+        },
+        "final_inventory": {
+          "brushes": 25,
+          "ribbons": 1,
+          "helmets": 11,
+          "beads": 0,
+          "marbles": 17
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Parker",
+        "to_agent": "Peyton",
+        "object_type": "marbles",
+        "quantity": 5,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Phoenix",
+        "to_agent": "Moon",
+        "object_type": "helmets",
+        "quantity": 2,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Moon",
+        "to_agent": "Parker",
+        "object_type": "helmets",
+        "quantity": 2,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Remy",
+        "to_agent": "Parker",
+        "object_type": "brushes",
+        "quantity": 1,
+        "transfer_id": 4
+      },
+      {
+        "from_agent": "Moon",
+        "to_agent": "Phoenix",
+        "object_type": "brushes",
+        "quantity": 4,
+        "transfer_id": 5
+      },
+      {
+        "from_agent": "Moon",
+        "to_agent": "Parker",
+        "object_type": "brushes",
+        "quantity": 2,
+        "transfer_id": 6
+      },
+      {
+        "from_agent": "Remy",
+        "to_agent": "Peyton",
+        "object_type": "helmets",
+        "quantity": 4,
+        "transfer_id": 7
+      },
+      {
+        "from_agent": "Peyton",
+        "to_agent": "Parker",
+        "object_type": "helmets",
+        "quantity": 7,
+        "transfer_id": 8
+      }
+    ],
+    "object_types": [
+      "brushes",
+      "ribbons",
+      "helmets",
+      "beads",
+      "marbles"
+    ],
+    "total_transfers": 8
+  },
+  {
+    "scenario_id": 48,
+    "agents": [
+      {
+        "name": "Taylor",
+        "initial_inventory": {
+          "shoes": 1,
+          "blocks": 4,
+          "pencils": 1,
+          "jerseys": 10
+        },
+        "final_inventory": {
+          "shoes": 6,
+          "blocks": 7,
+          "pencils": 0,
+          "jerseys": 13
+        }
+      },
+      {
+        "name": "Tatum",
+        "initial_inventory": {
+          "shoes": 24,
+          "blocks": 15,
+          "pencils": 5,
+          "jerseys": 13
+        },
+        "final_inventory": {
+          "shoes": 19,
+          "blocks": 15,
+          "pencils": 6,
+          "jerseys": 12
+        }
+      },
+      {
+        "name": "Wren",
+        "initial_inventory": {
+          "shoes": 3,
+          "blocks": 13,
+          "pencils": 9,
+          "jerseys": 5
+        },
+        "final_inventory": {
+          "shoes": 3,
+          "blocks": 8,
+          "pencils": 9,
+          "jerseys": 5
+        }
+      },
+      {
+        "name": "Emery",
+        "initial_inventory": {
+          "shoes": 0,
+          "blocks": 12,
+          "pencils": 17,
+          "jerseys": 22
+        },
+        "final_inventory": {
+          "shoes": 0,
+          "blocks": 14,
+          "pencils": 17,
+          "jerseys": 20
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Tatum",
+        "to_agent": "Emery",
+        "object_type": "shoes",
+        "quantity": 5,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Taylor",
+        "to_agent": "Tatum",
+        "object_type": "pencils",
+        "quantity": 1,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Taylor",
+        "to_agent": "Emery",
+        "object_type": "blocks",
+        "quantity": 2,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Emery",
+        "to_agent": "Taylor",
+        "object_type": "shoes",
+        "quantity": 5,
+        "transfer_id": 4
+      },
+      {
+        "from_agent": "Emery",
+        "to_agent": "Taylor",
+        "object_type": "jerseys",
+        "quantity": 2,
+        "transfer_id": 5
+      },
+      {
+        "from_agent": "Wren",
+        "to_agent": "Taylor",
+        "object_type": "blocks",
+        "quantity": 5,
+        "transfer_id": 6
+      },
+      {
+        "from_agent": "Tatum",
+        "to_agent": "Taylor",
+        "object_type": "jerseys",
+        "quantity": 1,
+        "transfer_id": 7
+      }
+    ],
+    "object_types": [
+      "shoes",
+      "blocks",
+      "pencils",
+      "jerseys"
+    ],
+    "total_transfers": 7
+  },
+  {
+    "scenario_id": 49,
+    "agents": [
+      {
+        "name": "Sage",
+        "initial_inventory": {
+          "clips": 4
+        },
+        "final_inventory": {
+          "clips": 1
+        }
+      },
+      {
+        "name": "Charlie",
+        "initial_inventory": {
+          "clips": 0
+        },
+        "final_inventory": {
+          "clips": 3
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Sage",
+        "to_agent": "Charlie",
+        "object_type": "clips",
+        "quantity": 2,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Sage",
+        "to_agent": "Charlie",
+        "object_type": "clips",
+        "quantity": 1,
+        "transfer_id": 2
+      }
+    ],
+    "object_types": [
+      "clips"
+    ],
+    "total_transfers": 2
+  },
+  {
+    "scenario_id": 50,
+    "agents": [
+      {
+        "name": "Nova",
+        "initial_inventory": {
+          "sandwiches": 14,
+          "beads": 22,
+          "stickers": 14,
+          "paints": 12,
+          "helmets": 15
+        },
+        "final_inventory": {
+          "sandwiches": 28,
+          "beads": 15,
+          "stickers": 14,
+          "paints": 12,
+          "helmets": 15
+        }
+      },
+      {
+        "name": "Casey",
+        "initial_inventory": {
+          "sandwiches": 15,
+          "beads": 3,
+          "stickers": 23,
+          "paints": 11,
+          "helmets": 15
+        },
+        "final_inventory": {
+          "sandwiches": 20,
+          "beads": 3,
+          "stickers": 27,
+          "paints": 11,
+          "helmets": 15
+        }
+      },
+      {
+        "name": "Drew",
+        "initial_inventory": {
+          "sandwiches": 7,
+          "beads": 3,
+          "stickers": 8,
+          "paints": 7,
+          "helmets": 0
+        },
+        "final_inventory": {
+          "sandwiches": 7,
+          "beads": 3,
+          "stickers": 8,
+          "paints": 7,
+          "helmets": 0
+        }
+      },
+      {
+        "name": "Alex",
+        "initial_inventory": {
+          "sandwiches": 1,
+          "beads": 0,
+          "stickers": 10,
+          "paints": 2,
+          "helmets": 2
+        },
+        "final_inventory": {
+          "sandwiches": 1,
+          "beads": 7,
+          "stickers": 2,
+          "paints": 2,
+          "helmets": 2
+        }
+      },
+      {
+        "name": "Quinn",
+        "initial_inventory": {
+          "sandwiches": 28,
+          "beads": 0,
+          "stickers": 4,
+          "paints": 30,
+          "helmets": 15
+        },
+        "final_inventory": {
+          "sandwiches": 19,
+          "beads": 0,
+          "stickers": 0,
+          "paints": 30,
+          "helmets": 15
+        }
+      },
+      {
+        "name": "Logan",
+        "initial_inventory": {
+          "sandwiches": 18,
+          "beads": 26,
+          "stickers": 13,
+          "paints": 4,
+          "helmets": 13
+        },
+        "final_inventory": {
+          "sandwiches": 8,
+          "beads": 26,
+          "stickers": 21,
+          "paints": 4,
+          "helmets": 13
+        }
+      }
+    ],
+    "transfers": [
+      {
+        "from_agent": "Alex",
+        "to_agent": "Logan",
+        "object_type": "stickers",
+        "quantity": 8,
+        "transfer_id": 1
+      },
+      {
+        "from_agent": "Logan",
+        "to_agent": "Nova",
+        "object_type": "sandwiches",
+        "quantity": 10,
+        "transfer_id": 2
+      },
+      {
+        "from_agent": "Nova",
+        "to_agent": "Alex",
+        "object_type": "beads",
+        "quantity": 7,
+        "transfer_id": 3
+      },
+      {
+        "from_agent": "Nova",
+        "to_agent": "Casey",
+        "object_type": "sandwiches",
+        "quantity": 5,
+        "transfer_id": 4
+      },
+      {
+        "from_agent": "Quinn",
+        "to_agent": "Nova",
+        "object_type": "sandwiches",
+        "quantity": 9,
+        "transfer_id": 5
+      },
+      {
+        "from_agent": "Quinn",
+        "to_agent": "Casey",
+        "object_type": "stickers",
+        "quantity": 4,
+        "transfer_id": 6
+      }
+    ],
+    "object_types": [
+      "sandwiches",
+      "beads",
+      "stickers",
+      "paints",
+      "helmets"
+    ],
+    "total_transfers": 6
+  }
+]
