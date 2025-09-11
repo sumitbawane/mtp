@@ -23,10 +23,19 @@ class GraphAwareMasker:
         
         # Pronoun and reference patterns for agent substitution
         self.agent_pronouns = {
-            'male': ['he', 'him', 'his'],
-            'female': ['she', 'her', 'hers'], 
-            'neutral': ['they', 'them', 'their']
+            'he': ['he', 'him', 'his'],
+            'she': ['she', 'her', 'hers'],
+            'they': ['they', 'them', 'their']
         }
+
+        # Mapping from common names to pronoun gender
+        self.name_pronoun_map = {
+            'he': ['Alex', 'Sam', 'Taylor', 'Jordan', 'Casey', 'Drew', 'Blake', 'River', 'Kai'],
+            'she': ['Morgan', 'Riley', 'Avery', 'Quinn', 'Sage', 'Rowan', 'Phoenix', 'Skylar', 'Dakota']
+        }
+
+        # Store assigned pronouns for each agent to ensure consistency
+        self.pronoun_map: Dict[str, List[str]] = {}
         
         # Mathematical expression templates for quantity substitution
         self.expression_templates = [
@@ -184,37 +193,63 @@ class GraphAwareMasker:
                                      scenario: Scenario, decision: MaskingDecision) -> Dict[str, Any]:
         """Replace agent names with pronouns and descriptors"""
         context = question_data.get('context', '')
-        
+
         agents = [agent.name for agent in scenario.agents]
         if len(agents) < 2:
             return question_data
-        
-        # Simple pronoun substitution (could be more sophisticated)
-        # Replace second mention of each agent with pronoun
-        for i, agent in enumerate(agents):
-            # Assign gender randomly for pronoun
-            gender = random.choice(['male', 'female', 'neutral'])
-            pronoun_set = self.agent_pronouns[gender]
-            
-            # Replace subsequent mentions
-            sentences = context.split('. ')
+
+        for agent in agents:
+            if agent not in self.pronoun_map:
+                pronoun_key = 'they'
+                for p, names in self.name_pronoun_map.items():
+                    if agent in names:
+                        pronoun_key = p
+                        break
+                self.pronoun_map[agent] = self.agent_pronouns[pronoun_key]
+
+            pronoun_set = self.pronoun_map[agent]
+
+            sentences = re.split(r'(?<=[.!?])\s+', context)
             first_mention = True
-            
+
             for j, sentence in enumerate(sentences):
-                if agent in sentence and not first_mention:
-                    # Replace with appropriate pronoun based on context
+                if agent in sentence:
+                    if first_mention:
+                        first_mention = False
+                        continue
+
                     if re.search(rf'{agent} (?:gives?|transfers?|sends?)', sentence):
-                        sentences[j] = sentence.replace(agent, pronoun_set[0])  # 'he/she/they'
+                        replacement = pronoun_set[0]
                     elif re.search(rf'to {agent}', sentence):
-                        sentences[j] = sentence.replace(agent, pronoun_set[1])  # 'him/her/them'
-                elif agent in sentence:
-                    first_mention = False
-            
-            context = '. '.join(sentences)
-        
+                        replacement = pronoun_set[1]
+                    else:
+                        replacement = pronoun_set[0]
+
+                    if sentence.strip().startswith(agent):
+                        replacement = replacement.capitalize()
+
+                    sentences[j] = re.sub(rf'\b{agent}\b', replacement, sentence)
+
+            context = ' '.join(sentences)
+
+        question_text = question_data.get('question', question_data.get('question_text', ''))
+        if question_text:
+            for agent in agents:
+                if agent in question_text and agent in self.pronoun_map:
+                    pronoun_set = self.pronoun_map[agent]
+                    replacement = pronoun_set[0]
+                    if question_text.strip().startswith(agent):
+                        replacement = replacement.capitalize()
+                    question_text = re.sub(rf'\b{agent}\b', replacement, question_text)
+
         masked_data = question_data.copy()
         masked_data['context'] = context
-        
+        if question_text:
+            if 'question' in question_data:
+                masked_data['question'] = question_text
+            else:
+                masked_data['question_text'] = question_text
+
         return masked_data
     
     def _apply_indirect_presentation(self, question_data: Dict[str, Any],
