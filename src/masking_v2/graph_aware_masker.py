@@ -5,7 +5,7 @@ Applies policy-based masking to AWP scenarios
 
 import re
 import random
-from typing import Dict, List, Any, Optional, Tuple
+from typing import Dict, List, Any, Optional
 import sys
 import os
 
@@ -28,16 +28,6 @@ class GraphAwareMasker:
             'neutral': ['they', 'them', 'their']
         }
         
-        # Mathematical expression templates for quantity substitution
-        self.expression_templates = [
-            "half of {amount}",
-            "{amount} divided by 2", 
-            "twice {smaller_amount}",
-            "{amount} minus {difference}",
-            "{amount} plus {addition}",
-            "the sum of {part1} and {part2}",
-            "the difference between {larger} and {smaller}"
-        ]
         
     def apply_graph_aware_masking(self,
                                  question_data: Dict[str, Any],
@@ -155,29 +145,36 @@ class GraphAwareMasker:
                                    scenario: Scenario, decision: MaskingDecision) -> Dict[str, Any]:
         """Replace direct quantities with mathematical expressions"""
         context = question_data.get('context', '')
-        
-        # Find quantity patterns and replace with expressions
-        quantity_pattern = r'(\w+) (?:gives?|transfers?|sends?) (\d+) (\w+)s? to (\w+)'
-        
-        def replace_quantity(match):
-            giver, amount_str, object_type, receiver = match.groups()
-            amount = int(amount_str)
-            
-            # Generate mathematical expression
-            if amount >= 4 and amount % 2 == 0:
-                return f"{giver} gives half of {amount * 2} {object_type}s to {receiver}"
-            elif amount >= 3:
-                smaller = amount - random.randint(1, 2)
-                addition = amount - smaller
-                return f"{giver} gives the sum of {smaller} and {addition} {object_type}s to {receiver}"
-            else:
-                return match.group(0)  # Keep original if too small
-        
-        context = re.sub(quantity_pattern, replace_quantity, context)
-        
+
+        target_transfers = decision.target_transfers or []
+        if not target_transfers:
+            return question_data
+
+        for transfer_id in target_transfers:
+            transfer = next((t for t in scenario.transfers if t.transfer_id == transfer_id), None)
+            if not transfer:
+                continue
+
+            expressions = self._generate_math_expressions(transfer.quantity)
+            if not expressions:
+                continue
+            expression = random.choice(expressions)
+
+            giver = re.escape(transfer.from_agent)
+            receiver = re.escape(transfer.to_agent)
+            object_type = re.escape(transfer.object_type)
+            qty = transfer.quantity
+
+            pattern = rf"({giver} (?:gives?|transfers?|sends?) )({qty})( {object_type}s? to {receiver})"
+
+            def repl(match):
+                return f"{match.group(1)}{expression}{match.group(3)}"
+
+            context = re.sub(pattern, repl, context, count=1)
+
         masked_data = question_data.copy()
         masked_data['context'] = context
-        
+
         return masked_data
     
     def _apply_agent_name_substitution(self, question_data: Dict[str, Any],
@@ -297,9 +294,94 @@ class GraphAwareMasker:
         
         masked_data = question_data.copy()
         masked_data['context'] = context
-        
+
         return masked_data
-    
+
+    def _generate_math_expressions(self, num: int) -> List[str]:
+        """Generate various mathematical expressions that equal the given number"""
+        if num == 0:
+            return ["0", "(1-1)", "(0*2)", "(5-5)"]
+
+        expressions = self._generate_expressions_algorithmically(num)
+
+        return expressions[:8] if len(expressions) > 8 else expressions
+
+    def _generate_expressions_algorithmically(self, num: int) -> List[str]:
+        """Generate mathematical expressions algorithmically for any number"""
+        expressions: List[str] = []
+
+        for i in range(1, min(num + 1, 10)):
+            expressions.append(f"({num - i}+{i})")
+            if i != num - i:
+                expressions.append(f"({i}+{num - i})")
+
+        for i in range(1, min(15, num + 10)):
+            expressions.append(f"({num + i}-{i})")
+
+        for i in range(2, min(11, num + 1)):
+            if num % i == 0:
+                factor = num // i
+                expressions.append(f"({factor}*{i})")
+                if factor != i:
+                    expressions.append(f"({i}*{factor})")
+
+        for i in range(2, min(6, num + 1)):
+            expressions.append(f"({num * i}/{i})")
+
+        if num > 1:
+            sqrt_val = int(num ** 0.5)
+            if sqrt_val * sqrt_val == num:
+                expressions.append(f"({sqrt_val}^2)")
+                expressions.append(f"sqrt({num})")
+
+            if num <= 27:
+                cube_root = round(num ** (1/3))
+                if cube_root ** 3 == num:
+                    expressions.append(f"({cube_root}^3)")
+
+        if num >= 3:
+            for mult in range(2, 6):
+                for sub in range(1, 4):
+                    if mult * (num + sub) // mult == num + sub and (num + sub) % mult == 0:
+                        base = (num + sub) // mult
+                        if base > 1:
+                            expressions.append(f"({base}*{mult}-{sub})")
+                for add in range(1, 4):
+                    if (num - add) % mult == 0 and (num - add) // mult > 0:
+                        base = (num - add) // mult
+                        expressions.append(f"({base}*{mult}+{add})")
+
+        if num <= 24:
+            factorials = {1: 1, 2: 2, 6: 3, 24: 4}
+            if num in factorials:
+                expressions.append(f"({factorials[num]}!)")
+
+        if 10 <= num <= 100:
+            tens = num // 10
+            ones = num % 10
+            if tens > 0 and ones > 0:
+                expressions.append(f"({tens*10}+{ones})")
+            if num % 5 == 0:
+                expressions.append(f"({num//5}*5)")
+            if num % 25 == 0:
+                expressions.append(f"({num//25}*25)")
+
+        expressions = list(set(expressions))
+
+        basic_expressions = [
+            f"({num}*1)",
+            f"({num}+0)",
+            f"({num*2}/2)"
+        ]
+
+        for expr in basic_expressions:
+            if expr not in expressions:
+                expressions.append(expr)
+
+        random.shuffle(expressions)
+
+        return expressions
+
     def explain_masking(self, masked_data: Dict[str, Any]) -> str:
         """Explain what masking was applied and why"""
         masking_info = masked_data.get('masking_applied', {})
