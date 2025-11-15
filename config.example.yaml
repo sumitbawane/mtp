@@ -1,0 +1,57 @@
+# Example configuration for MTP2 dataset generation
+
+meta:
+  seed: 1234
+  logging_level: INFO
+
+dataset:
+  num_scenarios: 20
+  questions_per_scenario: 6
+  output_dir: output
+  questions_filename: questions.json
+  scenarios_filename: scenarios.json
+
+scenario:
+  agents: [3, 8]
+  objects: [2, 4]
+  transfers: [4, 10]
+  graph_types: ["tree", "ring", "star", "flow"]
+  max_quantity: 40
+
+questions:
+  basic_types:
+    - initial_count
+    - final_count
+    - difference
+    - transfer_amount
+    - total_transferred
+    - total_received
+    - sum_all
+  advanced_types:
+    - comparative_more
+    - comparative_difference
+    - temporal_after_step
+    - conditional_if_gave_more
+    - multi_agent_combined
+    - ratio_fraction
+    - ratio_percentage
+  multi_hop_types:
+    - multi_hop_indirect
+    - multi_hop_net_flow
+    - multi_hop_path_count
+  advanced_probability: 0.2
+  multi_hop_probability: 0.15
+
+masking:
+  enable_masking: true
+  enable_scrambling: true
+  masking_probability: 0.85
+  scramble_probability: 0.6
+  patterns:
+    mask_initial_count: 0.35
+    comparative_inference: 0.35
+    percentage_ratio: 0.30
+
+analysis:
+  enable: true
+  report_file: output/quality_report.json

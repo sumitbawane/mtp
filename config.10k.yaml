@@ -1,0 +1,67 @@
+meta:
+  seed: 1234
+  logging_level: INFO
+
+dataset:
+  num_scenarios: 1000
+  questions_per_scenario: 10
+  output_dir: output
+  questions_filename: questions.10k.json
+  scenarios_filename: scenarios.10k.json
+
+scenario:
+  agents: [3, 10]
+  objects: [2, 5]
+  transfers: [5, 12]
+  graph_types:
+    - tree
+    - ring
+    - star
+    - flow
+    - dag
+    - complete
+    - bipartite
+    - supply_chain
+    - merger
+  max_quantity: 60
+
+questions:
+  basic_types:
+    - initial_count
+    - final_count
+    - difference
+    - transfer_amount
+    - total_transferred
+    - total_received
+    - sum_all
+  advanced_types:
+    - comparative_more
+    - comparative_difference
+    - temporal_after_step
+    - conditional_if_gave_more
+    - multi_agent_combined
+    - ratio_fraction
+    - ratio_percentage
+    - sequential_before_step
+    - sequential_between_transfers
+  multi_hop_types:
+    - multi_hop_indirect
+    - multi_hop_net_flow
+    - multi_hop_path_count
+    - multi_hop_multi_step
+  advanced_probability: 0.25
+  multi_hop_probability: 0.2
+
+masking:
+  enable_masking: true
+  enable_scrambling: true
+  masking_probability: 0.85
+  scramble_probability: 0.6
+  patterns:
+    mask_initial_count: 0.35
+    comparative_inference: 0.35
+    percentage_ratio: 0.30
+
+analysis:
+  enable: true
+  report_file: output/quality_report.10k.json
