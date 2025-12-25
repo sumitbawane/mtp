@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import random
 import re
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 from .scenario import Scenario
 from .text import TextProcessor
@@ -19,6 +19,7 @@ class MaskingEngine:
         masking_probability: float,
         scramble_probability: float,
         pattern_weights: Dict[str, float],
+        masking_factors: Dict[str, float],
         seed: int | None = None,
     ) -> None:
         self.enable_masking = enable_masking
@@ -26,6 +27,7 @@ class MaskingEngine:
         self.masking_probability = masking_probability
         self.scramble_probability = scramble_probability
         self.pattern_weights = pattern_weights
+        self.masking_factors = masking_factors
         self.rng = random.Random(seed)
         self.text = TextProcessor(seed=seed)
 
@@ -52,14 +54,14 @@ class MaskingEngine:
         return initial_sentences + transfer_sentences
 
     # ------------------------------------------------------------------
-    def apply(self, question: Dict, scenario: Scenario) -> Dict:
+    def apply(self, question: Dict, scenario: Scenario) -> Tuple[Dict, float]:
         context = question.setdefault("context_sentences", [])
         if not context:
             question["masking_applied"] = "none"
-            return question
+            return question, 1.0
         if not self.enable_masking or self.rng.random() > self.masking_probability:
             question["masking_applied"] = "none"
-            return question
+            return question, 1.0
 
         patterns = [
             ("mask_initial_count", self._mask_initial_count),
@@ -74,9 +76,11 @@ class MaskingEngine:
             question["context_sentences"] = updated
             self._update_text(question)
             question.setdefault("masking_applied", pattern_name)
+            masking_factor = self.masking_factors.get(pattern_name, 1.0)
         else:
             question["masking_applied"] = "none"
-        return question
+            masking_factor = 1.0
+        return question, masking_factor
 
     # ------------------------------------------------------------------
     def _mask_initial_count(self, question: Dict, scenario: Scenario) -> List[str] | None:

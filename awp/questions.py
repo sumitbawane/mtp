@@ -184,6 +184,7 @@ class QuestionGenerator:
             masking_probability=config.question.masking_probability,
             scramble_probability=config.question.scramble_probability,
             pattern_weights=config.masking.pattern_probabilities,
+            masking_factors=config.complexity.masking_factors,
             seed=seed or config.meta.seed,
         )
         self.scenario_factory = ScenarioFactory(config, seed=seed or config.meta.seed)
@@ -327,12 +328,13 @@ class QuestionGenerator:
             "metadata": metadata,
         }
 
-        record = self.masking.apply(record, scenario)
+        record, masking_factor = self.masking.apply(record, scenario)
         scenario_complexity = scenario.complexity or 1.0
         weighted = (
             scenario_complexity
             * self.config.complexity.question_type_weights.get(qtype, 1.0)
             * multiplier
+            * masking_factor
         )
         record["complexity_score"] = round(weighted, 2)
         record["scenario_complexity"] = scenario_complexity

@@ -45,3 +45,22 @@ output/test_runs/*.json
 
 # Claude Code
 .claude/
+
+# Research and experimental directories
+ontology_solver/
+report_final/
+iitm-format/
+poster/
+research_papers/
+results/
+notebooks/
+
+# Debug and test files
+debug_*.py
+test_ontology_solver.py
+test_bert_vs_pattern.py
+ONTOLOGY_SOLVER_README.md
+
+# Temporary/misc
+nul
+images/

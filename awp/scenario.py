@@ -114,13 +114,14 @@ class ScenarioGenerator:
         agent_names = self._sample_agents(num_agents)
         object_types = self._sample_objects(num_objects)
         inventories = self._initial_inventories(agent_names, object_types, difficulty, template)
+        working_inventories = {name: holdings.copy() for name, holdings in inventories.items()}
 
         graph, graph_type = self.graph_builder.build(agent_names, target_transfers)
         transfers = self._generate_transfers(
             graph,
             agent_names,
             object_types,
-            inventories,
+            working_inventories,
             target_transfers,
             template.max_quantity,
         )
@@ -283,14 +284,21 @@ class ScenarioGenerator:
     def _finalize_agents(
         self,
         agent_names: List[str],
-        inventories: Dict[str, Dict[str, int]],
+        initial_inventories: Dict[str, Dict[str, int]],
         transfers: List[Transfer],
     ) -> List[Agent]:
-        final = {name: holdings.copy() for name, holdings in inventories.items()}
+        final = {name: holdings.copy() for name, holdings in initial_inventories.items()}
         for transfer in transfers:
             final[transfer.from_agent][transfer.object_type] -= transfer.quantity
             final[transfer.to_agent][transfer.object_type] += transfer.quantity
-        return [Agent(name=name, initial_inventory=inventories[name], final_inventory=final[name]) for name in agent_names]
+        return [
+            Agent(
+                name=name,
+                initial_inventory=initial_inventories[name],
+                final_inventory=final[name],
+            )
+            for name in agent_names
+        ]
 
     # ------------------------------------------------------------------
     def _complexity_score(self, scenario_params: Dict[str, float], metrics: Dict[str, float]) -> float:
@@ -309,6 +317,5 @@ class ScenarioGenerator:
 
 #alias Backward-compatible 
 ScenarioFactory = ScenarioGenerator
-
 
 

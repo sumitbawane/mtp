@@ -168,10 +168,9 @@ class ComplexityConfig:
     masking_factors: Dict[str, float] = field(
         default_factory=lambda: {
             "mask_initial_count": 2.0,
-            "indirect_mathematical_presentation": 1.5,
-            "quantity_substitution": 1.0,
-            "sentence_scrambling": 0.5,
-            "none": 0.0,
+            "comparative_inference_chains": 1.5,
+            "percentage_ratio_masking": 1.25,
+            "none": 1.0,
         }
     )
     question_type_weights: Dict[str, float] = field(
