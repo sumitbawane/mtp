@@ -45,9 +45,9 @@ class TemplateManager:
         "transfer_amount": [
             "How many {object} moved between {agent} and {other_agent}?",
             "What quantity of {object} was traded between {agent} and {other_agent}?",
-            "How many {object} did {agent} pass to {other_agent}?",
-            "How many {object} did {agent} receive from {other_agent}?",
             "Count the {object} exchanged between {agent} and {other_agent}.",
+            "What was the total {object} transferred between {agent} and {other_agent}?",
+            "How many {object} passed between {agent} and {other_agent}?",
         ],
         "total_transferred": [
             "How many {object} did {agent} give away?",
@@ -129,13 +129,22 @@ class AnswerCalculator:
     def difference(self, agent: Agent, obj: str) -> int:
         return agent.final_inventory.get(obj, 0) - agent.initial_inventory.get(obj, 0)
 
-    def transfer_amount(self, scenario: Scenario, agent: Agent, obj: str) -> int:
+    def transfer_amount(self, scenario: Scenario, agent: Agent, obj: str, other_agent: str = None) -> int:
+        """Calculate total amount transferred between two specific agents."""
+        total = 0
         for transfer in scenario.transfers:
             if obj != transfer.object_type:
                 continue
-            if transfer.from_agent == agent.name or transfer.to_agent == agent.name:
-                return transfer.quantity
-        return 0
+            # If other_agent is specified, only count transfers between agent and other_agent
+            if other_agent:
+                if (transfer.from_agent == agent.name and transfer.to_agent == other_agent) or \
+                   (transfer.from_agent == other_agent and transfer.to_agent == agent.name):
+                    total += transfer.quantity
+            else:
+                # Fallback: count any transfer involving agent
+                if transfer.from_agent == agent.name or transfer.to_agent == agent.name:
+                    total += transfer.quantity
+        return total
 
     def total_transferred(self, scenario: Scenario, agent: Agent, obj: str) -> int:
         return sum(
@@ -250,8 +259,10 @@ class QuestionGenerator:
 
     # ------------------------------------------------------------------
     def _build_basic_question(self, scenario: Scenario, agent: Agent, obj: str, qtype: str) -> Dict:
-        question_text = self._render_question(qtype, scenario, agent, obj)
-        answer = self._compute_answer(qtype, scenario, agent, obj)
+        # For transfer_amount, select other_agent first so question and answer use same agent
+        other_agent = self._another_agent_name(scenario, agent) if qtype == "transfer_amount" else None
+        question_text = self._render_question(qtype, scenario, agent, obj, other_agent=other_agent)
+        answer = self._compute_answer(qtype, scenario, agent, obj, other_agent=other_agent)
         multiplier = self.config.complexity.question_type_weights.get(qtype, 1.0)
         return self._finalize_record(
             scenario,
@@ -261,7 +272,7 @@ class QuestionGenerator:
             question_text,
             answer,
             multiplier,
-            metadata={},
+            metadata={"other_agent": other_agent} if other_agent else {},
         )
 
     def _build_advanced_question(
@@ -342,14 +353,16 @@ class QuestionGenerator:
 
     # ------------------------------------------------------------------
     def _render_question(
-        self, question_type: str, scenario: Scenario, agent: Agent, obj: str
+        self, question_type: str, scenario: Scenario, agent: Agent, obj: str, other_agent: str = None
     ) -> str:
+        # Use provided other_agent or generate random one
+        other = other_agent or self._another_agent_name(scenario, agent)
         kwargs = {
             "agent": agent.name,
             "agent_a": agent.name,
             "agent_b": self._another_agent_name(scenario, agent),
             "object": obj,
-            "other_agent": self._another_agent_name(scenario, agent),
+            "other_agent": other,
             "agents": ", ".join(a.name for a in scenario.agents[:3]),
             "step": self.rng.randint(1, max(1, len(scenario.transfers))),
             "extra": self.rng.randint(1, 5),
@@ -361,13 +374,13 @@ class QuestionGenerator:
         others = [a.name for a in scenario.agents if a.name != agent.name]
         return self.rng.choice(others) if others else agent.name
 
-    def _compute_answer(self, question_type: str, scenario: Scenario, agent: Agent, obj: str):
+    def _compute_answer(self, question_type: str, scenario: Scenario, agent: Agent, obj: str, other_agent: str = None):
         calc = self.calculator
         dispatch = {
             "initial_count": lambda: calc.initial_count(agent, obj),
             "final_count": lambda: calc.final_count(agent, obj),
             "difference": lambda: calc.difference(agent, obj),
-            "transfer_amount": lambda: calc.transfer_amount(scenario, agent, obj),
+            "transfer_amount": lambda: calc.transfer_amount(scenario, agent, obj, other_agent),
             "total_transferred": lambda: calc.total_transferred(scenario, agent, obj),
             "total_received": lambda: calc.total_received(scenario, agent, obj),
             "sum_all": lambda: calc.sum_all(scenario, obj),

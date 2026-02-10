@@ -1,0 +1,45 @@
+# Simple configuration for testing ontology solver
+# Only basic question types, no masking
+
+meta:
+  seed: 42
+  logging_level: INFO
+
+dataset:
+  num_scenarios: 100
+  questions_per_scenario: 7
+  output_dir: output
+  questions_filename: questions_simple.json
+  scenarios_filename: scenarios_simple.json
+
+difficulty:
+  agents_range: [3, 8]
+  objects_range: [1, 2]
+  transfers_range: [4, 10]
+  max_quantity: 40
+
+graph:
+  types: ["tree", "ring", "star", "flow_network", "dag", "complete", "bipartite"]
+
+question:
+  enable_masking: false
+  enable_scrambling: false
+  masking_probability: 0.0
+  scramble_probability: 0.0
+  enable_advanced_types: false
+  enable_multi_hop: false
+  advanced_type_probability: 0.0
+  multi_hop_probability: 0.0
+  question_types:
+    - initial_count
+    - final_count
+    - difference
+    - transfer_amount
+    - total_transferred
+    - total_received
+    - sum_all
+  advanced_question_types: []
+
+output:
+  print_statistics: true
+  print_sample_questions: true
