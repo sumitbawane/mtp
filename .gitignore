@@ -47,7 +47,6 @@ output/test_runs/*.json
 .claude/
 
 # Research and experimental directories
-ontology_solver/
 report_final/
 iitm-format/
 poster/

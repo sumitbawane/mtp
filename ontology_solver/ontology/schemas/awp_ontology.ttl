@@ -1,0 +1,175 @@
+@prefix awp: <http://example.org/awp#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# ==============================
+# Arithmetic Word Problem Ontology
+# ==============================
+# This ontology models arithmetic word problems involving agents
+# exchanging objects through transfers.
+
+# ==============================
+# Classes
+# ==============================
+
+awp:Scenario a owl:Class ;
+    rdfs:label "Scenario" ;
+    rdfs:comment "A complete arithmetic word problem scenario with agents and transfers" .
+
+awp:Agent a owl:Class ;
+    rdfs:label "Agent" ;
+    rdfs:comment "An entity that holds objects and participates in transfers" .
+
+awp:Transfer a owl:Class ;
+    rdfs:label "Transfer" ;
+    rdfs:comment "An action where objects move from one agent to another" .
+
+awp:ObjectType a owl:Class ;
+    rdfs:label "Object Type" ;
+    rdfs:comment "A category of countable items (e.g., apples, books, marbles)" .
+
+awp:Inventory a owl:Class ;
+    rdfs:label "Inventory" ;
+    rdfs:comment "A snapshot of an agent's holdings at a point in time" .
+
+# ==============================
+# Scenario Properties
+# ==============================
+
+awp:hasScenarioId a owl:DatatypeProperty ;
+    rdfs:domain awp:Scenario ;
+    rdfs:range xsd:integer ;
+    rdfs:label "has scenario ID" ;
+    rdfs:comment "Unique identifier for the scenario" .
+
+awp:hasDifficulty a owl:DatatypeProperty ;
+    rdfs:domain awp:Scenario ;
+    rdfs:range xsd:string ;
+    rdfs:label "has difficulty" ;
+    rdfs:comment "Difficulty level of the scenario (simple, moderate, complex, extreme)" .
+
+awp:hasAgent a owl:ObjectProperty ;
+    rdfs:domain awp:Scenario ;
+    rdfs:range awp:Agent ;
+    rdfs:label "has agent" ;
+    rdfs:comment "Links a scenario to a participating agent" .
+
+awp:hasTransfer a owl:ObjectProperty ;
+    rdfs:domain awp:Scenario ;
+    rdfs:range awp:Transfer ;
+    rdfs:label "has transfer" ;
+    rdfs:comment "Links a scenario to a transfer action" .
+
+awp:hasObjectType a owl:ObjectProperty ;
+    rdfs:domain awp:Scenario ;
+    rdfs:range awp:ObjectType ;
+    rdfs:label "has object type" ;
+    rdfs:comment "Links a scenario to an object type involved" .
+
+awp:graphType a owl:DatatypeProperty ;
+    rdfs:domain awp:Scenario ;
+    rdfs:range xsd:string ;
+    rdfs:label "graph type" ;
+    rdfs:comment "Type of transfer graph (tree, ring, star, flow_network, etc.)" .
+
+# ==============================
+# Agent Properties
+# ==============================
+
+awp:agentName a owl:DatatypeProperty ;
+    rdfs:domain awp:Agent ;
+    rdfs:range xsd:string ;
+    rdfs:label "agent name" ;
+    rdfs:comment "The name of the agent (e.g., 'Alex', 'Sam')" .
+
+awp:hasInitialInventory a owl:ObjectProperty ;
+    rdfs:domain awp:Agent ;
+    rdfs:range awp:Inventory ;
+    rdfs:label "has initial inventory" ;
+    rdfs:comment "Links an agent to their starting inventory" .
+
+awp:hasFinalInventory a owl:ObjectProperty ;
+    rdfs:domain awp:Agent ;
+    rdfs:range awp:Inventory ;
+    rdfs:label "has final inventory" ;
+    rdfs:comment "Links an agent to their ending inventory after all transfers" .
+
+awp:participatesIn a owl:ObjectProperty ;
+    rdfs:domain awp:Agent ;
+    rdfs:range awp:Scenario ;
+    rdfs:label "participates in" ;
+    rdfs:comment "Links an agent to the scenario they participate in" .
+
+# ==============================
+# Inventory Properties
+# ==============================
+
+awp:holdsObject a owl:ObjectProperty ;
+    rdfs:domain awp:Inventory ;
+    rdfs:range awp:ObjectType ;
+    rdfs:label "holds object" ;
+    rdfs:comment "Links an inventory to an object type it contains" .
+
+awp:quantity a owl:DatatypeProperty ;
+    rdfs:domain awp:Inventory ;
+    rdfs:range xsd:integer ;
+    rdfs:label "quantity" ;
+    rdfs:comment "The count of objects in this inventory" .
+
+awp:belongsToAgent a owl:ObjectProperty ;
+    rdfs:domain awp:Inventory ;
+    rdfs:range awp:Agent ;
+    rdfs:label "belongs to agent" ;
+    rdfs:comment "Links an inventory back to its owning agent" .
+
+# ==============================
+# Transfer Properties
+# ==============================
+
+awp:fromAgent a owl:ObjectProperty ;
+    rdfs:domain awp:Transfer ;
+    rdfs:range awp:Agent ;
+    rdfs:label "from agent" ;
+    rdfs:comment "The agent who sends objects in this transfer" .
+
+awp:toAgent a owl:ObjectProperty ;
+    rdfs:domain awp:Transfer ;
+    rdfs:range awp:Agent ;
+    rdfs:label "to agent" ;
+    rdfs:comment "The agent who receives objects in this transfer" .
+
+awp:transfersObject a owl:ObjectProperty ;
+    rdfs:domain awp:Transfer ;
+    rdfs:range awp:ObjectType ;
+    rdfs:label "transfers object" ;
+    rdfs:comment "The type of object being transferred" .
+
+awp:transferQuantity a owl:DatatypeProperty ;
+    rdfs:domain awp:Transfer ;
+    rdfs:range xsd:integer ;
+    rdfs:label "transfer quantity" ;
+    rdfs:comment "The count of objects being transferred" .
+
+awp:stepNumber a owl:DatatypeProperty ;
+    rdfs:domain awp:Transfer ;
+    rdfs:range xsd:integer ;
+    rdfs:label "step number" ;
+    rdfs:comment "Sequential position of this transfer in the scenario" .
+
+awp:partOfScenario a owl:ObjectProperty ;
+    rdfs:domain awp:Transfer ;
+    rdfs:range awp:Scenario ;
+    rdfs:label "part of scenario" ;
+    rdfs:comment "Links a transfer back to its parent scenario" .
+
+# ==============================
+# Object Type Properties
+# ==============================
+
+awp:objectName a owl:DatatypeProperty ;
+    rdfs:domain awp:ObjectType ;
+    rdfs:range xsd:string ;
+    rdfs:label "object name" ;
+    rdfs:comment "The name of the object type (e.g., 'apples', 'books')" .
